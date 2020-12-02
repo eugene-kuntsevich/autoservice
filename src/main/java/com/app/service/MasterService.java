@@ -14,7 +14,10 @@ public class MasterService
 	public void addUser(MasterEntity masterEntity)
 	{
 		masterEntity.setFirstName(masterEntity.getFirstName() + "123");
+		masterEntity.setSecondName(masterEntity.getSecondName().toUpperCase());
 		masterDao.saveMaster(masterEntity);
+
+
 	}
 
 	@Autowired
