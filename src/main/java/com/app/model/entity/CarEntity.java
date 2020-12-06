@@ -1,6 +1,9 @@
 package com.app.model.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,10 +35,10 @@ public class CarEntity extends PersistableEntityImpl
 //		this.secondName = secondName;
 //	}
 
-	/*private ClientEntity clientEntity;
+	private ClientEntity clientEntity;
 
 	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name="id")
+	@JoinColumn(name="clientId")
 	public ClientEntity getClientEntity()
 	{
 		return clientEntity;
@@ -44,5 +47,5 @@ public class CarEntity extends PersistableEntityImpl
 	public void setClientEntity(ClientEntity clientEntity)
 	{
 		this.clientEntity = clientEntity;
-	}*/
+	}
 }
