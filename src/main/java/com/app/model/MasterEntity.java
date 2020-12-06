@@ -10,33 +10,35 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "master")
-public class MasterEntity
-{
-	private Long id;
-	private String firstName;
-//	private String secondName;
+public class MasterEntity {
+    private Long id;
+    private String firstName;
+    private String secondName;
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id")
-	public Long getId()
-	{
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id")
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@Column(name = "first_name", length = 300)
-	public String getFirstName()
-	{
-		return firstName;
-	}
+    @Column(name = "first_name", length = 300)
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFirstName(String firstName)
-	{
-		this.firstName = firstName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    @Column(name = "secondName", length = 300)
+    public String getSecondName() {return secondName; }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
 }
