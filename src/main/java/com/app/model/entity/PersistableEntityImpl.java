@@ -3,9 +3,11 @@ package com.app.model.entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@MappedSuperclass
 public class PersistableEntityImpl implements PersistableEntity
 {
 	private Long id;

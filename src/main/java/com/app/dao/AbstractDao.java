@@ -6,13 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.dao.api.GenericDao;
+import com.app.model.entity.PersistableEntity;
 import com.app.model.entity.PersistableEntityImpl;
 
-public abstract class AbstractDao<T extends PersistableEntityImpl> extends PersistableEntityImpl implements GenericDao<T>
+public abstract class AbstractDao<T extends PersistableEntity> extends PersistableEntityImpl implements GenericDao<T>
 {
 	protected EntityManager entityManager;
 	private Class<T> clazz;
@@ -35,6 +37,7 @@ public abstract class AbstractDao<T extends PersistableEntityImpl> extends Persi
 	}
 
 	@Override
+	@Transactional
 	public void saveOrUpdate(T entity)
 	{
 		if (entity.getId() != null)
