@@ -12,9 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.dao.api.GenericDao;
 import com.app.model.entity.PersistableEntity;
-import com.app.model.entity.PersistableEntityImpl;
 
-public abstract class AbstractDao<T extends PersistableEntity> extends PersistableEntityImpl implements GenericDao<T>
+public abstract class AbstractDao<T extends PersistableEntity> implements GenericDao<T>
 {
 	protected EntityManager entityManager;
 	private Class<T> clazz;
@@ -25,15 +24,16 @@ public abstract class AbstractDao<T extends PersistableEntity> extends Persistab
 	}
 
 	@Override
-	public T get(long id)
+	public T getById(long id)
 	{
 		return entityManager.find(clazz, id);
 	}
 
 	@Override
+	@Transactional
 	public void delete(T entity)
 	{
-		entityManager.remove(entity);
+		entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public abstract class AbstractDao<T extends PersistableEntity> extends Persistab
 	}
 
 	@Override
-	public List<T> list()
+	public List<T> getAll()
 	{
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = builder.createQuery(clazz);

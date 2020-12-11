@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.app.model.entity.PersistableEntity;
 
-public interface GenericDao<T extends PersistableEntity> extends PersistableEntity
+public interface GenericDao<T extends PersistableEntity>
 {
-	T get(long id);
+	T getById(long id);
 
 	void delete(T entity);
 
 	void saveOrUpdate(T entity);
 
-	List<T> list();
+	List<T> getAll();
 }

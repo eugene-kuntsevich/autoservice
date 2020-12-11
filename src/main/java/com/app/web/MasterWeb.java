@@ -1,13 +1,18 @@
 package com.app.web;
 
-import com.app.model.entity.PersistableEntityImpl;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.app.model.entity.MasterEntity;
-import com.app.service.MasterService;
-
-import java.util.List;
+import com.app.service.api.MasterService;
 
 @RestController
 @RequestMapping("/master")
@@ -15,34 +20,30 @@ public class MasterWeb
 {
 	private MasterService masterService;
 
-	/*@PostMapping("/add-master")
-	public void addUser(@RequestBody MasterEntity userEntity)
+	@PostMapping("/save")
+	public void addMaster(@RequestBody MasterEntity userEntity)
 	{
-		masterService.addUser(userEntity);
-           	}
-*/
-
-
-	@PostMapping("/save-master")
-	public void saveMaster(@RequestBody MasterEntity userEntity)
-	{
-		masterService.saveMaster(userEntity);
+		masterService.addMaster(userEntity);
 	}
-	@DeleteMapping("/delete-master")
+
+	@DeleteMapping("/delete")
 	public void deleteMaster(@RequestBody MasterEntity userEntity)
 	{
 		masterService.deleteMaster(userEntity);
 	}
-	@GetMapping ("/getById-master/{id}")
-	public MasterEntity getMasterById(@PathVariable long id)
+
+	@GetMapping("/findById/{id}")
+	public MasterEntity findMasterById(@PathVariable Long id)
 	{
-		return masterService.getMasterById(id);
+		return masterService.findMasterById(id);
 	}
-	@GetMapping ("/findAll-master")
+
+	@GetMapping("/findAll")
 	public List<MasterEntity> findAllMasters()
 	{
 		return masterService.findAllMasters();
 	}
+
 	@Autowired
 	public void setMasterService(MasterService masterService)
 	{
