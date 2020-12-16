@@ -1,51 +1,43 @@
 package com.app.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "car")
-public class CarEntity extends PersistableEntityImpl
-{
-	//	private String firstName;
-//	private String secondName;
-//
-//	@Column(name = "first_name", length = 300)
-//	public String getFirstName()
-//	{
-//		return firstName;
-//	}
-//
-//	public void setFirstName(String firstName)
-//	{
-//		this.firstName = firstName;
-//	}
-//
-//	@Column(name = "secondName", length = 300)
-//	public String getSecondName()
-//	{
-//		return secondName;
-//	}
-//
-//	public void setSecondName(String secondName)
-//	{
-//		this.secondName = secondName;
-//	}
+public class CarEntity extends PersistableEntityImpl {
+    private String carNumber;
+    private Date warrantyDate;
+    private OrderEntity orderEntity;
 
-	private ClientEntity clientEntity;
+    @Column(name = "car_number", length = 300)
+    public String getCarNumber() {
+        return carNumber;
+    }
 
-	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name="clientId")
-	public ClientEntity getClientEntity()
-	{
-		return clientEntity;
-	}
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
+    }
 
-	public void setClientEntity(ClientEntity clientEntity)
-	{
-		this.clientEntity = clientEntity;
-	}
+    @Column(name = "warranty_date", length = 300)
+    public Date getWarrantyDate() {
+        return warrantyDate;
+    }
+
+    public void setWarrantyDate(Date warrantyDate) {
+        this.warrantyDate = warrantyDate;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "orderId")
+    @JsonManagedReference
+    public OrderEntity getOrderEntity() {
+        return orderEntity;
+    }
+
+    public void setOrderEntity(OrderEntity orderEntity) {
+        this.orderEntity = orderEntity;
+    }
 }

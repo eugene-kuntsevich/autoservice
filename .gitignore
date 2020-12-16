@@ -26,3 +26,5 @@ hs_err_pid*
 *.iml
 /out/
 /target/
+
+src/main/resources/application.properties
