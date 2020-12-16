@@ -1,16 +1,15 @@
 package com.app.model.entity;
 
-
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
-
 @Entity
-@Table(name = "order")
+@Table(name = "order_table")
 public class OrderEntity extends PersistableEntityImpl {
 
     private ClientEntity clientEntity;
@@ -39,9 +38,9 @@ public class OrderEntity extends PersistableEntityImpl {
         this.orderStatusEntity = orderStatusEntity;
     }
 
-
-    @OneToOne(mappedBy = "orderEntity", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @OneToOne
+    @JoinColumn(name = "carId")
+    @JsonManagedReference
     public CarEntity getCarEntity() {
         return carEntity;
     }

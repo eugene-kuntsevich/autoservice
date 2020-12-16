@@ -21,7 +21,7 @@ public class OrderStatusEntity extends PersistableEntityImpl
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "orderStatusEntity", cascade = CascadeType.ALL)
 	@JsonBackReference
 	public Set<OrderEntity> getOrderEntities() {
 		return orderEntities;
