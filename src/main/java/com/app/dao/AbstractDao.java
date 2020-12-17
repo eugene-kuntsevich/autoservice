@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.dao.api.GenericDao;
-import com.app.model.entity.PersistableEntity;
+import com.app.model.api.PersistableEntity;
 
 public abstract class AbstractDao<T extends PersistableEntity> implements GenericDao<T>
 {

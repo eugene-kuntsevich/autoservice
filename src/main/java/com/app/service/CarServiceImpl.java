@@ -1,6 +1,8 @@
 package com.app.service;
 
 import com.app.dao.api.CarDao;
+import com.app.model.converter.CarConverter;
+import com.app.model.dto.CarDto;
 import com.app.model.entity.CarEntity;
 import com.app.service.api.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,8 @@ public class CarServiceImpl implements CarService {
     private CarDao carDao;
 
     @Override
-    public void addCar(CarEntity carEntity) {
+    public void addCar(CarDto carDto) {
+        CarEntity carEntity = CarConverter.convertFromDtoToEntity(carDto);
         carDao.saveOrUpdate(carEntity);
     }
 

@@ -1,5 +1,6 @@
 package com.app.web;
 
+import com.app.model.dto.CarDto;
 import com.app.model.entity.CarEntity;
 import com.app.service.CarServiceImpl;
 import com.app.service.api.CarService;
@@ -19,8 +20,8 @@ public class CarWeb {
     }
 
     @PostMapping("/save-car")
-    public void addCar(@RequestBody CarEntity userEntity) {
-        carService.addCar(userEntity);
+    public void addCar(@RequestBody CarDto carDto) {
+        carService.addCar(carDto);
     }
 
     @GetMapping("/find-all-cars")

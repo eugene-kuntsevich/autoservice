@@ -1,7 +1,13 @@
 package com.app.model.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -15,6 +21,7 @@ public class OrderEntity extends PersistableEntityImpl {
     private ClientEntity clientEntity;
     private OrderStatusEntity orderStatusEntity;
     private CarEntity carEntity;
+    private Set<MasterEntity> masterEntity;
 
     @ManyToOne
     @JoinColumn(name = "clientId")
@@ -47,5 +54,18 @@ public class OrderEntity extends PersistableEntityImpl {
 
     public void setCarEntity(CarEntity carEntity) {
         this.carEntity = carEntity;
+    }
+
+    @ManyToMany(targetEntity = MasterEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "master_order", joinColumns = {@JoinColumn(name = "order_id")},
+        inverseJoinColumns = {@JoinColumn(name = "master_id")})
+    public Set<MasterEntity> getMasterEntity()
+    {
+        return masterEntity;
+    }
+
+    public void setMasterEntity(Set<MasterEntity> masterEntity)
+    {
+        this.masterEntity = masterEntity;
     }
 }

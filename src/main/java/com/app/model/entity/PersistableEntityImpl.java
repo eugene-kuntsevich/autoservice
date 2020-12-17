@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.app.model.api.PersistableEntity;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @MappedSuperclass

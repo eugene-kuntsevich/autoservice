@@ -16,7 +16,8 @@ public class CarEntity extends PersistableEntityImpl {
     private Date warrantyDate;
     private OrderEntity orderEntity;
 
-    @Column(name = "car_number", length = 300)
+
+    @Column(name = "car_number", length = 20, nullable = false)
     public String getCarNumber() {
         return carNumber;
     }
@@ -25,7 +26,7 @@ public class CarEntity extends PersistableEntityImpl {
         this.carNumber = carNumber;
     }
 
-    @Column(name = "warranty_date", length = 300)
+    @Column(name = "warranty_date")
     public Date getWarrantyDate() {
         return warrantyDate;
     }

@@ -2,7 +2,7 @@ package com.app.dao.api;
 
 import java.util.List;
 
-import com.app.model.entity.PersistableEntity;
+import com.app.model.api.PersistableEntity;
 
 public interface GenericDao<T extends PersistableEntity>
 {
