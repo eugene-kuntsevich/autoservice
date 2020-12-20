@@ -12,7 +12,7 @@ public class OrderStatusEntity extends PersistableEntityImpl
 	private String name;
 	private Set<OrderEntity> orderEntities;
 
-	@Column(name = "name", length = 300)
+	@Column(name = "name", length = 30, nullable = false)
 	public String getName() {
 		return name;
 	}

@@ -26,7 +26,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void deleteCar(CarEntity carEntity) {
+    public void deleteCar(CarDto carDto) {
+        CarEntity carEntity = CarConverter.convertFromDtoToEntity(carDto);
         carDao.delete(carEntity);
     }
 

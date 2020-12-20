@@ -2,6 +2,8 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.model.converter.MasterConverter;
+import com.app.model.dto.MasterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,9 @@ public class MasterServiceImpl implements MasterService
 {
 	private MasterDao masterDao;
 
-	public void addMaster(MasterEntity masterEntity)
+	public void addMaster(MasterDto masterDto)
 	{
+		MasterEntity masterEntity = MasterConverter.convertFromDtoToEntity(masterDto);
 		masterDao.saveOrUpdate(masterEntity);
 	}
 
@@ -24,8 +27,9 @@ public class MasterServiceImpl implements MasterService
 		return masterDao.getById(id);
 	}
 
-	public void deleteMaster(MasterEntity masterEntity)
+	public void deleteMaster(MasterDto masterDto)
 	{
+		MasterEntity masterEntity = MasterConverter.convertFromDtoToEntity(masterDto);
 		masterDao.delete(masterEntity);
 	}
 

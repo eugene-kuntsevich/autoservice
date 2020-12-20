@@ -1,6 +1,8 @@
 package com.app.service;
 
 import com.app.dao.api.ClientDao;
+import com.app.model.converter.ClientConverter;
+import com.app.model.dto.ClientDto;
 import com.app.model.entity.ClientEntity;
 import com.app.service.api.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,8 @@ public class ClientServiceImpl implements ClientService {
     private ClientDao clientDao;
 
     @Override
-    public void addClient(ClientEntity clientEntity) {
+    public void addClient(ClientDto clientDto) {
+        ClientEntity clientEntity = ClientConverter.convertFromDtoToEntity(clientDto);
         clientDao.saveOrUpdate(clientEntity);
     }
 
@@ -23,7 +26,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteClient(ClientEntity clientEntity) {
+    public void deleteClient(ClientDto clientDto) {
+        ClientEntity clientEntity = ClientConverter.convertFromDtoToEntity(clientDto);
         clientDao.delete(clientEntity);
     }
 

@@ -1,6 +1,8 @@
 package com.app.service;
 
 import com.app.dao.api.OrderDao;
+import com.app.model.converter.OrderConverter;
+import com.app.model.dto.OrderDto;
 import com.app.model.entity.OrderEntity;
 import com.app.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Override
-    public void addOrder(OrderEntity orderEntity) {
+    public void addOrder(OrderDto orderDto) {
+        OrderEntity orderEntity = OrderConverter.convertFromDtoToEntity(orderDto);
         orderDao.saveOrUpdate(orderEntity);
     }
 
@@ -24,7 +27,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(OrderEntity orderEntity) {
+    public void deleteOrder(OrderDto orderDto) {
+        OrderEntity orderEntity = OrderConverter.convertFromDtoToEntity(orderDto);
         orderDao.delete(orderEntity);
     }
 
