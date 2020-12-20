@@ -2,6 +2,7 @@ package com.app.web;
 
 import java.util.List;
 
+import com.app.model.dto.MasterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +22,15 @@ public class MasterWeb
 	private MasterService masterService;
 
 	@PostMapping("/save")
-	public void addMaster(@RequestBody MasterEntity userEntity)
+	public void addMaster(@RequestBody MasterDto masterDto)
 	{
-		masterService.addMaster(userEntity);
+		masterService.addMaster(masterDto);
 	}
 
 	@DeleteMapping("/delete")
-	public void deleteMaster(@RequestBody MasterEntity userEntity)
+	public void deleteMaster(@RequestBody MasterDto masterDto)
 	{
-		masterService.deleteMaster(userEntity);
+		masterService.deleteMaster(masterDto);
 	}
 
 	@GetMapping("/findById/{id}")

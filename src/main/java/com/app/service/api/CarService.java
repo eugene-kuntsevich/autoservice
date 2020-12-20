@@ -11,7 +11,7 @@ public interface CarService
 
 	CarEntity findCarById(long id);
 
-	void deleteCar(CarEntity carEntity);
+	void deleteCar(CarDto carDto);
 
 	List<CarEntity> findAllCars();
 }

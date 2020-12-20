@@ -1,5 +1,6 @@
 package com.app.web;
 
+import com.app.model.dto.OrderDto;
 import com.app.model.entity.OrderEntity;
 import com.app.service.OrderServiceImpl;
 import com.app.service.api.OrderService;
@@ -19,8 +20,8 @@ public class OrderWeb {
     }
 
     @PostMapping("/save-order")
-    public void addOrder(@RequestBody OrderEntity userEntity) {
-        orderService.addOrder(userEntity);
+    public void addOrder(@RequestBody OrderDto orderDto) {
+        orderService.addOrder(orderDto);
     }
 
     @GetMapping("/find-all-order")
@@ -29,8 +30,8 @@ public class OrderWeb {
     }
 
     @DeleteMapping("/delete-order")
-    public void deleteOrder(@RequestBody OrderEntity userEntity) {
-        orderService.deleteOrder(userEntity);
+    public void deleteOrder(@RequestBody OrderDto orderDto) {
+        orderService.deleteOrder(orderDto);
     }
 
     @Autowired

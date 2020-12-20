@@ -30,8 +30,8 @@ public class CarWeb {
     }
 
     @DeleteMapping("/delete-car")
-    public void deleteCar(@RequestBody CarEntity userEntity) {
-        carService.deleteCar(userEntity);
+    public void deleteCar(@RequestBody CarDto CarDto) {
+        carService.deleteCar( CarDto);
     }
 
 

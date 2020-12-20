@@ -1,5 +1,6 @@
 package com.app.web;
 
+import com.app.model.dto.OrderStatusDto;
 import com.app.model.entity.OrderStatusEntity;
 import com.app.service.OrderStatusServiceImpl;
 import com.app.service.api.OrderStatusService;
@@ -20,8 +21,8 @@ public class OrderStatusWeb {
     }
 
     @PostMapping("/save-order-status")
-    public void addOrderStatus(@RequestBody OrderStatusEntity userEntity) {
-        orderStatusService.addOrderStatus(userEntity);
+    public void addOrderStatus(@RequestBody OrderStatusDto orderStatusDto) {
+        orderStatusService.addOrderStatus(orderStatusDto);
     }
 
     @GetMapping("/find-all-order-status")
@@ -30,8 +31,8 @@ public class OrderStatusWeb {
     }
 
     @DeleteMapping("/delete-order-status")
-    public void deleteOrderStatus (@RequestBody OrderStatusEntity userEntity) {
-        orderStatusService.deleteOrderStatus(userEntity);
+    public void deleteOrderStatus (@RequestBody OrderStatusDto orderStatusDto) {
+        orderStatusService.deleteOrderStatus(orderStatusDto);
     }
 
     @Autowired

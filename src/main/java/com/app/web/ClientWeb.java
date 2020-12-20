@@ -1,5 +1,6 @@
 package com.app.web;
 
+import com.app.model.dto.ClientDto;
 import com.app.model.entity.ClientEntity;
 import com.app.service.api.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class ClientWeb {
     }
 
     @PostMapping("/save-client")
-    public void addClient(@RequestBody ClientEntity userEntity) {
-        clientService.addClient(userEntity);
+    public void addClient(@RequestBody ClientDto clientDto) {
+        clientService.addClient(clientDto);
     }
 
     @GetMapping("/find-all-clients")
@@ -28,8 +29,8 @@ public class ClientWeb {
     }
 
     @DeleteMapping("/delete-client")
-    public void deleteClient(@RequestBody ClientEntity userEntity) {
-        clientService.deleteClient(userEntity);
+    public void deleteClient(@RequestBody ClientDto ClientDto) {
+        clientService.deleteClient(ClientDto);
     }
 
     @Autowired

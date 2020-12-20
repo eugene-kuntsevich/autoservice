@@ -19,7 +19,7 @@ public class ClientEntity extends PersistableEntityImpl
 	private String email;
 	private Set<OrderEntity> orderEntities;
 
-	@Column(name = "first_name", length = 300)
+	@Column(name = "first_name", length = 20, nullable = false)
 	public String getFirstName()
 	{
 		return firstName;
@@ -30,7 +30,7 @@ public class ClientEntity extends PersistableEntityImpl
 		this.firstName = firstName;
 	}
 
-	@Column(name = "secondName", length = 300)
+	@Column(name = "secondName", length = 20, nullable = false)
 	public String getSecondName()
 	{
 		return secondName;
@@ -41,7 +41,7 @@ public class ClientEntity extends PersistableEntityImpl
 		this.secondName = secondName;
 	}
 
-	@Column(name = "email", length = 200)
+	@Column(name = "email", length = 50)
 	public String getEmail()
 	{
 		return email;

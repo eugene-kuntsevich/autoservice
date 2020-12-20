@@ -57,15 +57,14 @@ public class OrderEntity extends PersistableEntityImpl {
     }
 
     @ManyToMany(targetEntity = MasterEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "master_order", joinColumns = {@JoinColumn(name = "order_id")},
-        inverseJoinColumns = {@JoinColumn(name = "master_id")})
-    public Set<MasterEntity> getMasterEntity()
-    {
+    @JoinTable(name = "master_order",
+            joinColumns = {@JoinColumn(name = "order_id")},
+            inverseJoinColumns = {@JoinColumn(name = "master_id")})
+    public Set<MasterEntity> getMasterEntity() {
         return masterEntity;
     }
 
-    public void setMasterEntity(Set<MasterEntity> masterEntity)
-    {
+    public void setMasterEntity(Set<MasterEntity> masterEntity) {
         this.masterEntity = masterEntity;
     }
 }
