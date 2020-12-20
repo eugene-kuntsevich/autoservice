@@ -37,11 +37,15 @@ public class MasterConverter {
         Set<OrderEntity> orderEntities = new HashSet<>();
         Set<OrderDto> ordersDto = dto.getOrdersDto();
 
-        for (OrderDto orderDto : ordersDto) {
-            orderEntities.add(OrderConverter.convertFromDtoToEntity(orderDto));
+        if (ordersDto != null) {
+            for (OrderDto orderDto : ordersDto) {
+                orderEntities.add(OrderConverter.convertFromDtoToEntity(orderDto));
+            }
         }
+        //Set<OrderEntity> orderEntities1 = OrderConverter.convertFromDtosToEntities(dto.getOrdersDto());
 
         masterEntity.setOrderEntity(orderEntities);
         return masterEntity;
+        //return masterEntity.setOrderEntity(OrderConverter.convertFromDtosToEntities(dto.getOrdersDto());
     }
 }

@@ -35,8 +35,11 @@ public class OrderStatusConverter {
 
         Set<OrderEntity> orderEntities = new HashSet<>();
         Set<OrderDto> ordersDto = dto.getOrdersDto();
-        for (OrderDto orderDto : ordersDto) {
-            orderEntities.add(OrderConverter.convertFromDtoToEntity(orderDto));
+        if (ordersDto != null)
+        {
+            for (OrderDto orderDto : ordersDto) {
+                orderEntities.add(OrderConverter.convertFromDtoToEntity(orderDto));
+            }
         }
 
         orderStatusEntity.setOrderEntities(orderEntities);

@@ -7,6 +7,7 @@ import com.app.model.entity.OrderEntity;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OrderConverter {
     public static OrderDto convertFromEntityToDto(OrderEntity entity) {
@@ -31,18 +32,33 @@ public class OrderConverter {
     public static OrderEntity convertFromDtoToEntity(OrderDto dto) {
 
         OrderEntity orderEntity = new OrderEntity();
-
-        orderEntity.setClientEntity(ClientConverter.convertFromDtoToEntity(dto.getClientDto()));
-        orderEntity.setOrderStatusEntity(OrderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
-        orderEntity.setCarEntity(CarConverter.convertFromDtoToEntity(dto.getCarDto()));
-
         Set<MasterEntity> masterEntities = new HashSet<>();
-        Set<MasterDto> mastersDto = dto.getMastersDto();
-        for (MasterDto masterDto : mastersDto) {
-            masterEntities.add(MasterConverter.convertFromDtoToEntity(masterDto));
+        if (dto != null)
+        {
+            orderEntity.setClientEntity(ClientConverter.convertFromDtoToEntity(dto.getClientDto()));
+            orderEntity.setOrderStatusEntity(OrderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
+            orderEntity.setCarEntity(CarConverter.convertFromDtoToEntity(dto.getCarDto()));
+            Set<MasterDto> mastersDto = dto.getMastersDto();
+            if (mastersDto != null)
+            {
+                for (MasterDto masterDto : mastersDto)
+                {
+                    masterEntities.add(MasterConverter.convertFromDtoToEntity(masterDto));
+                }
+            }
         }
-
         orderEntity.setMasterEntity(masterEntities);
         return orderEntity;
+    }
+
+    public static Set<OrderEntity> convertFromDtosToEntities(Set<OrderDto> dtos) {
+//        Set<OrderEntity> result = new HashSet<>();
+//        for (OrderDto dto : dtos)
+//        {
+//            OrderEntity orderEntity = convertFromDtoToEntity(dto);
+//            result.add(orderEntity);
+//        }
+//        return result;
+      return dtos.stream().map(OrderConverter::convertFromDtoToEntity).collect(Collectors.toSet());
     }
 }

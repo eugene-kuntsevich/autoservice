@@ -2,6 +2,7 @@ package com.app.model.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -35,7 +36,7 @@ public class CarEntity extends PersistableEntityImpl {
         this.warrantyDate = warrantyDate;
     }
 
-    @OneToOne(mappedBy = "carEntity")
+    @OneToOne(mappedBy = "carEntity", cascade= CascadeType.ALL)
     @JsonBackReference
     public OrderEntity getOrderEntity() {
         return orderEntity;

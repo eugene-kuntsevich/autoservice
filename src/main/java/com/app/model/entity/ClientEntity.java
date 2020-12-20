@@ -30,7 +30,7 @@ public class ClientEntity extends PersistableEntityImpl
 		this.firstName = firstName;
 	}
 
-	@Column(name = "secondName", length = 20, nullable = false)
+	@Column(name = "second_name", length = 20, nullable = false)
 	public String getSecondName()
 	{
 		return secondName;

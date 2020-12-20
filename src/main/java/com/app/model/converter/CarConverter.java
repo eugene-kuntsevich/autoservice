@@ -1,6 +1,7 @@
 package com.app.model.converter;
 
 import com.app.model.dto.CarDto;
+import com.app.model.dto.OrderDto;
 import com.app.model.entity.CarEntity;
 
 public class CarConverter {
@@ -20,7 +21,11 @@ public class CarConverter {
 
         carEntity.setCarNumber(dto.getCarNumber());
         carEntity.setWarrantyDate(dto.getWarrantyDate());
-        carEntity.setOrderEntity(OrderConverter.convertFromDtoToEntity(dto.getOrderDto()));
+        OrderDto orderDto = dto.getOrderDto();
+        if (orderDto != null)
+        {
+            carEntity.setOrderEntity(OrderConverter.convertFromDtoToEntity(orderDto));
+        }
 
         return carEntity;
     }

@@ -3,9 +3,20 @@ package com.app.model.dto;
 import java.util.Date;
 
 public class CarDto {
+    private Long id;
     private String carNumber;
     private Date warrantyDate;
     private OrderDto orderDto;
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public String getCarNumber() {
         return carNumber;

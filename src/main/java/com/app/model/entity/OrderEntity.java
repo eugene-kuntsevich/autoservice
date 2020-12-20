@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "order_table")
+@Table(name = "`order`")
 public class OrderEntity extends PersistableEntityImpl {
 
     private ClientEntity clientEntity;
@@ -23,8 +23,8 @@ public class OrderEntity extends PersistableEntityImpl {
     private CarEntity carEntity;
     private Set<MasterEntity> masterEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "clientId")
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     @JsonManagedReference
     public ClientEntity getClientEntity() {
         return clientEntity;
@@ -34,8 +34,8 @@ public class OrderEntity extends PersistableEntityImpl {
         this.clientEntity = clientEntity;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "statusId")
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "status_id")
     @JsonManagedReference
     public OrderStatusEntity getOrderStatusEntity() {
         return orderStatusEntity;
@@ -45,8 +45,8 @@ public class OrderEntity extends PersistableEntityImpl {
         this.orderStatusEntity = orderStatusEntity;
     }
 
-    @OneToOne
-    @JoinColumn(name = "carId")
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "car_id")
     @JsonManagedReference
     public CarEntity getCarEntity() {
         return carEntity;

@@ -22,7 +22,7 @@ public class MasterEntity extends PersistableEntityImpl {
         this.firstName = firstName;
     }
 
-    @Column(name = "secondName", length = 20, nullable = false)
+    @Column(name = "second_name", length = 20, nullable = false)
     public String getSecondName() {
         return secondName;
     }
@@ -33,8 +33,8 @@ public class MasterEntity extends PersistableEntityImpl {
 
     @ManyToMany(targetEntity = OrderEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "master_order",
-            joinColumns = @JoinColumn(name = "masterId"),
-            inverseJoinColumns = @JoinColumn(name = "orderId"))
+            joinColumns = @JoinColumn(name = "master_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
     @JsonBackReference
     public Set<OrderEntity> getOrderEntity() {
         return orderEntities;
