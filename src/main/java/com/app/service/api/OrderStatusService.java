@@ -8,9 +8,9 @@ public interface OrderStatusService
 {
 	void addOrderStatus(OrderStatusDto orderStatusDto);
 
-	OrderStatusEntity findOrderStatusById(long id);
+	OrderStatusDto findOrderStatusById(long id);
 
 	void deleteOrderStatus(OrderStatusDto orderStatusDto);
 
-	List<OrderStatusEntity> findAllOrderStatus();
+	List<OrderStatusDto> findAllOrderStatuses();
 }

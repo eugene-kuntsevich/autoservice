@@ -1,33 +1,53 @@
 package com.app.model.dto;
 
-import java.util.Set;
+import java.util.List;
 
-public class MasterDto {
-    private String firstName;
-    private String secondName;
-    private Set<OrderDto> ordersDto;
+import com.app.model.api.Dto;
 
-    public String getFirstName() {
-        return firstName;
-    }
+public class MasterDto implements Dto {
+	private Long id;
+	private String firstName;
+	private String secondName;
+	private List<OrderDto> ordersDto;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	@Override
+	public Long getId()
+	{
+		return id;
+	}
 
-    public String getSecondName() {
-        return secondName;
-    }
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
+	public String getFirstName()
+	{
+		return firstName;
+	}
 
-    public Set<OrderDto> getOrdersDto() {
-        return ordersDto;
-    }
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
 
-    public void setOrdersDto(Set<OrderDto> ordersDto) {
-        this.ordersDto = ordersDto;
-    }
+	public String getSecondName()
+	{
+		return secondName;
+	}
+
+	public void setSecondName(String secondName)
+	{
+		this.secondName = secondName;
+	}
+
+	public List<OrderDto> getOrdersDto()
+	{
+		return ordersDto;
+	}
+
+	public void setOrdersDto(List<OrderDto> ordersDto)
+	{
+		this.ordersDto = ordersDto;
+	}
 }

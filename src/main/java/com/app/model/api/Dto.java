@@ -1,6 +1,6 @@
 package com.app.model.api;
 
-public interface PersistableEntity {
+public interface Dto {
 
 	Long getId();
 

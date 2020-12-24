@@ -12,32 +12,41 @@ import java.util.List;
 
 @Service
 public class OrderStatusServiceImpl implements OrderStatusService {
+    
     private OrderStatusDao orderStatusDao;
+    private OrderStatusConverter orderStatusConverter;
 
     @Override
     public void addOrderStatus(OrderStatusDto orderStatusDto) {
-        OrderStatusEntity orderStatusEntity = OrderStatusConverter.convertFromDtoToEntity(orderStatusDto);
+        OrderStatusEntity orderStatusEntity = orderStatusConverter.convertFromDtoToEntity(orderStatusDto);
         orderStatusDao.saveOrUpdate(orderStatusEntity);
     }
 
     @Override
-    public OrderStatusEntity findOrderStatusById(long id) {
-        return orderStatusDao.getById(id);
+    public OrderStatusDto findOrderStatusById(long id) {
+        OrderStatusEntity orderStatusEntity = orderStatusDao.getById(id);
+        return orderStatusConverter.convertFromEntityToDto(orderStatusEntity);
     }
 
     @Override
     public void deleteOrderStatus(OrderStatusDto orderStatusDto) {
-        OrderStatusEntity orderStatusEntity = OrderStatusConverter.convertFromDtoToEntity(orderStatusDto);
+        OrderStatusEntity orderStatusEntity = orderStatusConverter.convertFromDtoToEntity(orderStatusDto);
         orderStatusDao.delete(orderStatusEntity);
     }
 
     @Override
-    public List<OrderStatusEntity> findAllOrderStatus() {
-        return orderStatusDao.getAll();
+    public List<OrderStatusDto> findAllOrderStatuses() {
+        List<OrderStatusEntity> orderStatusEntities = orderStatusDao.getAll();
+        return orderStatusConverter.convertFromEntitiesToDtos(orderStatusEntities);
     }
 
     @Autowired
-    public void setOrderStatus(OrderStatusDao orderStatusDao) {
+    public void setOrderStatusDao(OrderStatusDao orderStatusDao) {
         this.orderStatusDao = orderStatusDao;
+    }
+
+    @Autowired
+    public void setOrderStatusConverter(OrderStatusConverter orderStatusConverter) {
+        this.orderStatusConverter = orderStatusConverter;
     }
 }

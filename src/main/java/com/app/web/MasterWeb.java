@@ -2,7 +2,6 @@ package com.app.web;
 
 import java.util.List;
 
-import com.app.model.dto.MasterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.model.entity.MasterEntity;
+import com.app.model.dto.MasterDto;
 import com.app.service.api.MasterService;
 
 @RestController
@@ -34,13 +33,13 @@ public class MasterWeb
 	}
 
 	@GetMapping("/findById/{id}")
-	public MasterEntity findMasterById(@PathVariable Long id)
+	public MasterDto findMasterById(@PathVariable Long id)
 	{
 		return masterService.findMasterById(id);
 	}
 
 	@GetMapping("/findAll")
-	public List<MasterEntity> findAllMasters()
+	public List<MasterDto> findAllMasters()
 	{
 		return masterService.findAllMasters();
 	}

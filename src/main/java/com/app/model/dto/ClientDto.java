@@ -1,14 +1,17 @@
 package com.app.model.dto;
 
-import java.util.Set;
+import java.util.List;
 
-public class ClientDto {
+import com.app.model.api.Dto;
+
+public class ClientDto implements Dto {
     private Long id;
     private String firstName;
     private String secondName;
     private String email;
-    private Set<OrderDto> ordersDto;
+    private List<OrderDto> ordersDto;
 
+    @Override
     public Long getId()
     {
         return id;
@@ -43,11 +46,13 @@ public class ClientDto {
         this.email = email;
     }
 
-    public Set<OrderDto> getOrdersDto() {
+    public List<OrderDto> getOrdersDto()
+    {
         return ordersDto;
     }
 
-    public void setOrdersDto(Set<OrderDto> ordersDto) {
+    public void setOrdersDto(List<OrderDto> ordersDto)
+    {
         this.ordersDto = ordersDto;
     }
 }

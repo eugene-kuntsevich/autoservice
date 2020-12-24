@@ -8,9 +8,9 @@ public interface OrderService
 {
 	void addOrder(OrderDto orderDto);
 
-	OrderEntity findOrderById(long id);
+	OrderDto findOrderById(long id);
 
 	void deleteOrder(OrderDto orderDto);
 
-	List<OrderEntity> findAllOrder();
+	List<OrderDto> findAllOrder();
 }

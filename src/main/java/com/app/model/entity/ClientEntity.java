@@ -1,14 +1,14 @@
 package com.app.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "client")
@@ -17,7 +17,7 @@ public class ClientEntity extends PersistableEntityImpl
 	private String firstName;
 	private String secondName;
 	private String email;
-	private Set<OrderEntity> orderEntities;
+	private List<OrderEntity> orderEntities;
 
 	@Column(name = "first_name", length = 20, nullable = false)
 	public String getFirstName()
@@ -55,11 +55,11 @@ public class ClientEntity extends PersistableEntityImpl
 
 	@OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
 	@JsonBackReference
-	public Set<OrderEntity> getOrderEntities() {
+	public List<OrderEntity> getOrderEntities() {
 		return orderEntities;
 	}
 
-	public void setOrderEntities(Set<OrderEntity> orderEntities) {
+	public void setOrderEntities(List<OrderEntity> orderEntities) {
 		this.orderEntities = orderEntities;
 	}
 

@@ -12,36 +12,42 @@ import com.app.model.entity.MasterEntity;
 import com.app.service.api.MasterService;
 
 @Service
-public class MasterServiceImpl implements MasterService
-{
+public class MasterServiceImpl implements MasterService {
+
 	private MasterDao masterDao;
+	private MasterConverter masterConverter;
 
 	public void addMaster(MasterDto masterDto)
 	{
-		MasterEntity masterEntity = MasterConverter.convertFromDtoToEntity(masterDto);
+		MasterEntity masterEntity = masterConverter.convertFromDtoToEntity(masterDto);
 		masterDao.saveOrUpdate(masterEntity);
 	}
 
-	public MasterEntity findMasterById(long id)
+	public MasterDto findMasterById(long id)
 	{
-		return masterDao.getById(id);
+		MasterEntity masterEntity = masterDao.getById(id);
+		return masterConverter.convertFromEntityToDto(masterEntity);
 	}
 
 	public void deleteMaster(MasterDto masterDto)
 	{
-		MasterEntity masterEntity = MasterConverter.convertFromDtoToEntity(masterDto);
+		MasterEntity masterEntity = masterConverter.convertFromDtoToEntity(masterDto);
 		masterDao.delete(masterEntity);
 	}
 
-	public List<MasterEntity> findAllMasters()
+	public List<MasterDto> findAllMasters()
 	{
-
-		return masterDao.getAll();
+		List<MasterEntity> masterEntities = masterDao.getAll();
+		return masterConverter.convertFromEntitiesToDtos(masterEntities);
 	}
 
 	@Autowired
-	public void setMasterDao(MasterDao masterDao)
-	{
+	public void setMasterDao(MasterDao masterDao) {
 		this.masterDao = masterDao;
+	}
+
+	@Autowired
+	public void setMasterConverter(MasterConverter masterConverter) {
+		this.masterConverter = masterConverter;
 	}
 }

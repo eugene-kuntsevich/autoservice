@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
@@ -61,6 +62,17 @@ public abstract class AbstractDao<T extends PersistableEntity> implements Generi
 		criteriaQuery.select(entityRoot);
 
 		return entityManager.createQuery(criteriaQuery).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(long id) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaDelete<T> criteriaDelete = builder.createCriteriaDelete(clazz);
+
+		Root<T> root = criteriaDelete.from(clazz);
+		criteriaDelete.where(builder.equal(root.get("id"), id));
+		entityManager.createQuery(criteriaDelete).executeUpdate();
 	}
 
 	@Autowired

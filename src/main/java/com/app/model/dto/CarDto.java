@@ -2,12 +2,15 @@ package com.app.model.dto;
 
 import java.util.Date;
 
-public class CarDto {
+import com.app.model.api.Dto;
+
+public class CarDto implements Dto {
     private Long id;
     private String carNumber;
     private Date warrantyDate;
     private OrderDto orderDto;
 
+    @Override
     public Long getId()
     {
         return id;

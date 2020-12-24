@@ -14,31 +14,39 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private OrderDao orderDao;
+    private OrderConverter orderConverter;
 
     @Override
     public void addOrder(OrderDto orderDto) {
-        OrderEntity orderEntity = OrderConverter.convertFromDtoToEntity(orderDto);
+        OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
         orderDao.saveOrUpdate(orderEntity);
     }
 
     @Override
-    public OrderEntity findOrderById(long id) {
-        return orderDao.getById(id);
+    public OrderDto findOrderById(long id) {
+        OrderEntity orderEntity = orderDao.getById(id);
+        return orderConverter.convertFromEntityToDto(orderEntity);
     }
 
     @Override
     public void deleteOrder(OrderDto orderDto) {
-        OrderEntity orderEntity = OrderConverter.convertFromDtoToEntity(orderDto);
+        OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
         orderDao.delete(orderEntity);
     }
 
     @Override
-    public List<OrderEntity> findAllOrder() {
-        return orderDao.getAll();
+    public List<OrderDto> findAllOrder() {
+        List<OrderEntity> orderEntities = orderDao.getAll();
+        return orderConverter.convertFromEntitiesToDtos(orderEntities);
     }
 
     @Autowired
-    public void setOrder(OrderDao orderDao) {
+    public void setOrderDao(OrderDao orderDao) {
         this.orderDao = orderDao;
+    }
+
+    @Autowired
+    public void setOrderConverter(OrderConverter orderConverter) {
+        this.orderConverter = orderConverter;
     }
 }

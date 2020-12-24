@@ -6,10 +6,8 @@ import com.app.model.entity.OrderStatusEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderStatusImpl extends AbstractDao<OrderStatusEntity> implements OrderStatusDao
-{
-	public OrderStatusImpl()
-	{
+public class OrderStatusDaoImpl extends AbstractDao<OrderStatusEntity> implements OrderStatusDao {
+	public OrderStatusDaoImpl() {
 		super(OrderStatusEntity.class);
 	}
 }

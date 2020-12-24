@@ -1,12 +1,14 @@
 package com.app.model.dto;
 
+import java.util.List;
 
-import java.util.Set;
+import com.app.model.api.Dto;
 
-public class OrderStatusDto {
+public class OrderStatusDto  implements Dto
+{
     private Long id;
     private String name;
-    private Set<OrderDto> ordersDto;
+    private List<OrderDto> ordersDto;
 
     public Long getId()
     {
@@ -26,11 +28,13 @@ public class OrderStatusDto {
         this.name = name;
     }
 
-    public Set<OrderDto> getOrdersDto() {
+    public List<OrderDto> getOrdersDto()
+    {
         return ordersDto;
     }
 
-    public void setOrdersDto(Set<OrderDto> ordersDto) {
+    public void setOrdersDto(List<OrderDto> ordersDto)
+    {
         this.ordersDto = ordersDto;
     }
 }

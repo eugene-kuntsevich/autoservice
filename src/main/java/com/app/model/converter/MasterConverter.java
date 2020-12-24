@@ -1,51 +1,57 @@
 package com.app.model.converter;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.app.dao.api.MasterDao;
+import com.app.model.api.Converter;
 import com.app.model.dto.MasterDto;
 import com.app.model.dto.OrderDto;
 import com.app.model.entity.MasterEntity;
 import com.app.model.entity.OrderEntity;
 
-import java.util.HashSet;
-import java.util.Set;
+@Component
+public class MasterConverter implements Converter<MasterDto, MasterEntity> {
 
-public class MasterConverter {
-    public static MasterDto convertFromEntityToDto(MasterEntity entity) {
+    private MasterDao masterDao;
+    private OrderConverter orderConverter;
 
+    @Override
+    public MasterDto convertFromEntityToDto(MasterEntity entity) {
         MasterDto masterDto = new MasterDto();
 
         masterDto.setFirstName(entity.getFirstName());
         masterDto.setSecondName(entity.getSecondName());
 
-        Set<OrderDto> ordersDto = new HashSet<>();
-        Set<OrderEntity> ordersEntity = entity.getOrderEntity();
-
-        for (OrderEntity orderEntity : ordersEntity) {
-            ordersDto.add(OrderConverter.convertFromEntityToDto(orderEntity));
-        }
+        List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntity());
         masterDto.setOrdersDto(ordersDto);
 
         return masterDto;
     }
 
-    public static MasterEntity convertFromDtoToEntity(MasterDto dto) {
-
-        MasterEntity masterEntity = new MasterEntity();
+    @Override
+    public MasterEntity convertFromDtoToEntity(MasterDto dto) {
+        Long id = dto.getId();
+        MasterEntity masterEntity = ( id != null ) ? masterDao.getById(id) : new MasterEntity();
 
         masterEntity.setFirstName(dto.getFirstName());
         masterEntity.setSecondName(dto.getSecondName());
 
-        Set<OrderEntity> orderEntities = new HashSet<>();
-        Set<OrderDto> ordersDto = dto.getOrdersDto();
-
-        if (ordersDto != null) {
-            for (OrderDto orderDto : ordersDto) {
-                orderEntities.add(OrderConverter.convertFromDtoToEntity(orderDto));
-            }
-        }
-        //Set<OrderEntity> orderEntities1 = OrderConverter.convertFromDtosToEntities(dto.getOrdersDto());
-
+        List<OrderEntity> orderEntities = orderConverter.convertFromDtosToEntities(dto.getOrdersDto());
         masterEntity.setOrderEntity(orderEntities);
+
         return masterEntity;
-        //return masterEntity.setOrderEntity(OrderConverter.convertFromDtosToEntities(dto.getOrdersDto());
+    }
+
+    @Autowired
+    public void setMasterDao(MasterDao masterDao) {
+        this.masterDao = masterDao;
+    }
+
+    @Autowired
+    public void setOrderConverter(OrderConverter orderConverter) {
+        this.orderConverter = orderConverter;
     }
 }

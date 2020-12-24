@@ -1,17 +1,18 @@
 package com.app.service.api;
 
-import com.app.model.dto.CarDto;
-import com.app.model.entity.CarEntity;
-
 import java.util.List;
+
+import com.app.model.dto.CarDto;
 
 public interface CarService
 {
 	void addCar(CarDto carDto);
 
-	CarEntity findCarById(long id);
+	CarDto findCarById(long id);
 
 	void deleteCar(CarDto carDto);
 
-	List<CarEntity> findAllCars();
+	void deleteCarById(long carId);
+
+	List<CarDto> findAllCars();
 }

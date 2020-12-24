@@ -1,64 +1,77 @@
 package com.app.model.converter;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.app.dao.api.OrderDao;
+import com.app.model.api.Converter;
 import com.app.model.dto.MasterDto;
 import com.app.model.dto.OrderDto;
 import com.app.model.entity.MasterEntity;
 import com.app.model.entity.OrderEntity;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+@Component
+public class OrderConverter implements Converter<OrderDto, OrderEntity> {
 
-public class OrderConverter {
-    public static OrderDto convertFromEntityToDto(OrderEntity entity) {
+    private OrderDao orderDao;
+    private ClientConverter clientConverter;
+    private OrderStatusConverter orderStatusConverter;
+    private CarConverter carConverter;
+    private MasterConverter masterConverter;
 
+    @Override
+    public OrderDto convertFromEntityToDto(OrderEntity entity) {
         OrderDto orderDto = new OrderDto();
 
-        orderDto.setClientDto(ClientConverter.convertFromEntityToDto(entity.getClientEntity()));
-        orderDto.setOrderStatusDto(OrderStatusConverter.convertFromEntityToDto(entity.getOrderStatusEntity()));
-        orderDto.setCarDto(CarConverter.convertFromEntityToDto(entity.getCarEntity()));
+        orderDto.setClientDto(clientConverter.convertFromEntityToDto(entity.getClientEntity()));
+        orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(entity.getOrderStatusEntity()));
+        orderDto.setCarDto(carConverter.convertFromEntityToDto(entity.getCarEntity()));
 
-        Set<MasterDto> mastersDto = new HashSet<>();
-        Set<MasterEntity> mastersEntity = entity.getMasterEntity();
-
-        for (MasterEntity masterEntity : mastersEntity) {
-            mastersDto.add(MasterConverter.convertFromEntityToDto(masterEntity));
-        }
+        List<MasterDto> mastersDto = new MasterConverter().convertFromEntitiesToDtos(entity.getMasterEntity());
         orderDto.setMastersDto(mastersDto);
 
         return orderDto;
     }
 
-    public static OrderEntity convertFromDtoToEntity(OrderDto dto) {
+    @Override
+    public OrderEntity convertFromDtoToEntity(OrderDto dto) {
+        Long id = dto.getId();
+        OrderEntity orderEntity = ( id != null ) ? orderDao.getById(id) : new OrderEntity();
 
-        OrderEntity orderEntity = new OrderEntity();
-        Set<MasterEntity> masterEntities = new HashSet<>();
-        if (dto != null)
-        {
-            orderEntity.setClientEntity(ClientConverter.convertFromDtoToEntity(dto.getClientDto()));
-            orderEntity.setOrderStatusEntity(OrderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
-            orderEntity.setCarEntity(CarConverter.convertFromDtoToEntity(dto.getCarDto()));
-            Set<MasterDto> mastersDto = dto.getMastersDto();
-            if (mastersDto != null)
-            {
-                for (MasterDto masterDto : mastersDto)
-                {
-                    masterEntities.add(MasterConverter.convertFromDtoToEntity(masterDto));
-                }
-            }
-        }
+        orderEntity.setClientEntity(clientConverter.convertFromDtoToEntity(dto.getClientDto()));
+        orderEntity.setOrderStatusEntity(orderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
+        orderEntity.setCarEntity(carConverter.convertFromDtoToEntity(dto.getCarDto()));
+
+        List<MasterEntity> masterEntities = new MasterConverter().convertFromDtosToEntities(dto.getMastersDto());
         orderEntity.setMasterEntity(masterEntities);
+
         return orderEntity;
     }
 
-    public static Set<OrderEntity> convertFromDtosToEntities(Set<OrderDto> dtos) {
-//        Set<OrderEntity> result = new HashSet<>();
-//        for (OrderDto dto : dtos)
-//        {
-//            OrderEntity orderEntity = convertFromDtoToEntity(dto);
-//            result.add(orderEntity);
-//        }
-//        return result;
-      return dtos.stream().map(OrderConverter::convertFromDtoToEntity).collect(Collectors.toSet());
+    @Autowired
+    public void setOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
+    }
+
+    @Autowired
+    public void setClientConverter(ClientConverter clientConverter) {
+        this.clientConverter = clientConverter;
+    }
+
+    @Autowired
+    public void setOrderStatusConverter(OrderStatusConverter orderStatusConverter) {
+        this.orderStatusConverter = orderStatusConverter;
+    }
+
+    @Autowired
+    public void setCarConverter(CarConverter carConverter) {
+        this.carConverter = carConverter;
+    }
+
+    @Autowired
+    public void setMasterConverter(MasterConverter masterConverter) {
+        this.masterConverter = masterConverter;
     }
 }

@@ -12,32 +12,46 @@ import java.util.List;
 
 @Service
 public class CarServiceImpl implements CarService {
+
     private CarDao carDao;
+    private CarConverter carConverter;
 
     @Override
     public void addCar(CarDto carDto) {
-        CarEntity carEntity = CarConverter.convertFromDtoToEntity(carDto);
+        CarEntity carEntity = carConverter.convertFromDtoToEntity(carDto);
         carDao.saveOrUpdate(carEntity);
     }
 
     @Override
-    public CarEntity findCarById(long id) {
-        return carDao.getById(id);
+    public CarDto findCarById(long id) {
+        CarEntity carEntity = carDao.getById(id);
+        return carConverter.convertFromEntityToDto(carEntity);
     }
 
     @Override
     public void deleteCar(CarDto carDto) {
-        CarEntity carEntity = CarConverter.convertFromDtoToEntity(carDto);
+        CarEntity carEntity = carConverter.convertFromDtoToEntity(carDto);
         carDao.delete(carEntity);
     }
 
     @Override
-    public List<CarEntity> findAllCars() {
-        return carDao.getAll();
+    public void deleteCarById(long carId) {
+        carDao.deleteById(carId);
+    }
+
+    @Override
+    public List<CarDto> findAllCars() {
+        List<CarEntity> carEntities = carDao.getAll();
+        return carConverter.convertFromEntitiesToDtos(carEntities);
     }
 
     @Autowired
     public void setCarDao(CarDao carDao) {
         this.carDao = carDao;
+    }
+
+    @Autowired
+    public void setCarConverter(CarConverter carConverter) {
+        this.carConverter = carConverter;
     }
 }

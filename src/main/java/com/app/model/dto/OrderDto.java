@@ -1,12 +1,27 @@
 package com.app.model.dto;
 
-import java.util.Set;
+import java.util.List;
 
-public class OrderDto {
+import com.app.model.api.Dto;
+
+public class OrderDto  implements Dto
+{
+    private Long id;
     private ClientDto clientDto;
     private OrderStatusDto orderStatusDto;
     private CarDto carDto;
-    private Set<MasterDto> mastersDto;
+    private List<MasterDto> mastersDto;
+
+    @Override
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public ClientDto getClientDto() {
         return clientDto;
@@ -32,11 +47,13 @@ public class OrderDto {
         this.carDto = carDto;
     }
 
-    public Set<MasterDto> getMastersDto() {
+    public List<MasterDto> getMastersDto()
+    {
         return mastersDto;
     }
 
-    public void setMastersDto(Set<MasterDto> mastersDto) {
+    public void setMastersDto(List<MasterDto> mastersDto)
+    {
         this.mastersDto = mastersDto;
     }
 }
