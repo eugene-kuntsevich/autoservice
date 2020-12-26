@@ -41,6 +41,11 @@ public class OrderStatusWeb {
         orderStatusService.deleteOrderStatus(orderStatusDto);
     }
 
+     @DeleteMapping("/delete-order-status-by-id/{id}")
+    public void deleteOrderStatus(@PathVariable long id) {
+        orderStatusService.deleteOrderStatusById(id);
+    }
+
     @Autowired
     public void setOrderStatus(OrderStatusServiceImpl orderStatusService) {
         this.orderStatusService = orderStatusService;

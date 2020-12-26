@@ -12,5 +12,7 @@ public interface ClientService
 
 	void deleteClient(ClientDto clientDto);
 
+	void deleteClientById(long carId);
+
 	List<ClientDto> findAllClient();
 }

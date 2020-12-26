@@ -35,6 +35,11 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     }
 
     @Override
+    public void deleteOrderStatusById(long orderStatusId) {
+        orderStatusDao.deleteById(orderStatusId);
+    }
+
+    @Override
     public List<OrderStatusDto> findAllOrderStatuses() {
         List<OrderStatusEntity> orderStatusEntities = orderStatusDao.getAll();
         return orderStatusConverter.convertFromEntitiesToDtos(orderStatusEntities);

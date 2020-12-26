@@ -20,29 +20,34 @@ public class MasterWeb
 {
 	private MasterService masterService;
 
-	@PostMapping("/save")
+	@PostMapping("/save-master")
 	public void addMaster(@RequestBody MasterDto masterDto)
 	{
 		masterService.addMaster(masterDto);
 	}
 
-	@DeleteMapping("/delete")
+	@DeleteMapping("/delete-master")
 	public void deleteMaster(@RequestBody MasterDto masterDto)
 	{
 		masterService.deleteMaster(masterDto);
 	}
 
-	@GetMapping("/findById/{id}")
+	@GetMapping("/get-master-by-id/{id}")
 	public MasterDto findMasterById(@PathVariable Long id)
 	{
 		return masterService.findMasterById(id);
 	}
 
-	@GetMapping("/findAll")
+	@GetMapping("/find-all-master")
 	public List<MasterDto> findAllMasters()
 	{
 		return masterService.findAllMasters();
 	}
+
+	 @DeleteMapping("/delete-master/{id}")
+    public void deleteMaster(@PathVariable long id) {
+        masterService.deleteMasterById(id);
+    }
 
 	@Autowired
 	public void setMasterService(MasterService masterService)

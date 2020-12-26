@@ -22,13 +22,15 @@ public class ClientConverter implements Converter<ClientDto, ClientEntity> {
     public ClientDto convertFromEntityToDto(ClientEntity entity) {
         ClientDto clientDto = new ClientDto();
 
-        clientDto.setFirstName(entity.getFirstName());
-        clientDto.setSecondName(entity.getSecondName());
-        clientDto.setEmail(entity.getEmail());
+        if (entity != null) {
 
-        List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntities());
-        clientDto.setOrdersDto(ordersDto);
+            clientDto.setFirstName(entity.getFirstName());
+            clientDto.setSecondName(entity.getSecondName());
+            clientDto.setEmail(entity.getEmail());
 
+            List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntities());
+            clientDto.setOrdersDto(ordersDto);
+        }
         return clientDto;
     }
 

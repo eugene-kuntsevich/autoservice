@@ -35,6 +35,11 @@ public class MasterServiceImpl implements MasterService {
 		masterDao.delete(masterEntity);
 	}
 
+	@Override
+    public void deleteMasterById(long masterId) {
+        masterDao.deleteById(masterId);
+    }
+
 	public List<MasterDto> findAllMasters()
 	{
 		List<MasterEntity> masterEntities = masterDao.getAll();

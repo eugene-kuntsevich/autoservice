@@ -12,5 +12,7 @@ public interface OrderStatusService
 
 	void deleteOrderStatus(OrderStatusDto orderStatusDto);
 
+	void deleteOrderStatusById(long orderStatusId);
+
 	List<OrderStatusDto> findAllOrderStatuses();
 }

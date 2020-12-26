@@ -36,6 +36,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public void deleteClientById(long clientId) {
+        clientDao.deleteById(clientId);
+    }
+
+    @Override
     public List<ClientDto> findAllClient() {
         List<ClientEntity> clientEntities = clientDao.getAll();
         return clientConverter.convertFromEntitiesToDtos(clientEntities);

@@ -12,5 +12,7 @@ public interface OrderService
 
 	void deleteOrder(OrderDto orderDto);
 
+	void deleteOrderById(long orderId);
+
 	List<OrderDto> findAllOrder();
 }

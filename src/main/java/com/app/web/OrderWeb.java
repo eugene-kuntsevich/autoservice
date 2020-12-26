@@ -40,6 +40,11 @@ public class OrderWeb {
         orderService.deleteOrder(orderDto);
     }
 
+     @DeleteMapping("/delete-order/{id}")
+    public void deleteOrder(@PathVariable long id) {
+        orderService.deleteOrderById(id);
+    }
+
     @Autowired
     public void setOrderStatus(OrderServiceImpl orderService) {
         this.orderService = orderService;

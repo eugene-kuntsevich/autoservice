@@ -30,7 +30,7 @@ public class CarWeb {
         carService.addCar(carDto);
     }
 
-    @GetMapping("/find-all-cars")
+    @GetMapping("/find-all-car")
     public List<CarDto> findAllCars() {
         return carService.findAllCars();
     }
@@ -40,7 +40,7 @@ public class CarWeb {
         carService.deleteCar( CarDto);
     }
 
-    @DeleteMapping("/delete-car/{id}")
+    @DeleteMapping("/delete-car-by-id/{id}")
     public void deleteCar(@PathVariable long id) {
         carService.deleteCarById(id);
     }

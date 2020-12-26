@@ -12,5 +12,7 @@ public interface MasterService
 
 	void deleteMaster(MasterDto masterDto);
 
+	void deleteMasterById(long masterId);
+
 	List<MasterDto> findAllMasters();
 }

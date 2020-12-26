@@ -29,7 +29,7 @@ public class ClientWeb {
         clientService.addClient(clientDto);
     }
 
-    @GetMapping("/find-all-clients")
+    @GetMapping("/find-all-client")
     public List<ClientDto> findAllClients() {
         return clientService.findAllClient();
     }
@@ -37,6 +37,11 @@ public class ClientWeb {
     @DeleteMapping("/delete-client")
     public void deleteClient(@RequestBody ClientDto ClientDto) {
         clientService.deleteClient(ClientDto);
+    }
+
+    @DeleteMapping("/delete-client-by-id/{id}")
+    public void deleteClient(@PathVariable long id) {
+        clientService.deleteClientById(id);
     }
 
     @Autowired
