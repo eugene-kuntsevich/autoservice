@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderService
 {
-	void addOrder(OrderDto orderDto);
+	void saveOrder(OrderDto orderDto) throws Exception;
 
 	OrderDto findOrderById(long id);
 

@@ -7,7 +7,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CarDaoImpl extends AbstractDao<CarEntity> implements CarDao {
+
     public CarDaoImpl() {
         super(CarEntity.class);
+    }
+
+    @Override
+    public CarEntity getCarByNumber(String number) {
+        return null;
     }
 }

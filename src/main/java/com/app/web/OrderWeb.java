@@ -26,8 +26,9 @@ public class OrderWeb {
     }
 
     @PostMapping("/save-order")
-    public void addOrder(@RequestBody OrderDto orderDto) {
-        orderService.addOrder(orderDto);
+    public void saveOrder(@RequestBody OrderDto orderDto) throws Exception
+    {
+        orderService.saveOrder(orderDto);
     }
 
     @GetMapping("/find-all-order")

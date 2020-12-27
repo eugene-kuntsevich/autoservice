@@ -17,9 +17,16 @@ public class OrderServiceImpl implements OrderService {
     private OrderConverter orderConverter;
 
     @Override
-    public void addOrder(OrderDto orderDto) {
+    public void saveOrder(OrderDto orderDto) throws Exception
+    {
         OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
-        orderDao.saveOrUpdate(orderEntity);
+        if (checkOrderStatus(orderDto))
+        {
+            orderDao.saveOrUpdate(orderEntity);
+        }
+        else {
+            throw new Exception();
+        }
     }
 
     @Override
@@ -53,5 +60,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     public void setOrderConverter(OrderConverter orderConverter) {
         this.orderConverter = orderConverter;
+    }
+
+    private static boolean checkOrderStatus(OrderDto orderDto){
+        return false;
     }
 }
