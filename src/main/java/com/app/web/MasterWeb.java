@@ -33,7 +33,7 @@ public class MasterWeb
 	}
 
 	@GetMapping("/get-master-by-id/{id}")
-	public MasterDto findMasterById(@PathVariable Long id)
+	public MasterDto findMasterById(@PathVariable long id)
 	{
 		return masterService.findMasterById(id);
 	}

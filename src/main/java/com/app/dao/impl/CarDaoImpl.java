@@ -5,6 +5,11 @@ import com.app.dao.api.CarDao;
 import com.app.model.entity.CarEntity;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+
 @Repository
 public class CarDaoImpl extends AbstractDao<CarEntity> implements CarDao {
 
@@ -13,7 +18,21 @@ public class CarDaoImpl extends AbstractDao<CarEntity> implements CarDao {
     }
 
     @Override
-    public CarEntity getCarByNumber(String number) {
-        return null;
+    public CarEntity getCarByNumber(String number) throws Exception {
+        CarEntity carEntity = null;
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<CarEntity> criteriaQuery = builder.createQuery(CarEntity.class);
+
+        Root<CarEntity> entityRoot = criteriaQuery.from(CarEntity.class);
+        criteriaQuery.select(entityRoot).where(builder.equal(entityRoot.get("carNumber"), number));
+
+        List<CarEntity> carEntities = entityManager.createQuery(criteriaQuery).getResultList();
+        if (carEntities.size() == 1) {
+            carEntity = entityManager.createQuery(criteriaQuery).getSingleResult();
+        } else if ( carEntities.size() > 1) {
+            throw new Exception();
+        }
+
+        return carEntity;
     }
 }

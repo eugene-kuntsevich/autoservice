@@ -22,11 +22,13 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
     public MasterDto convertFromEntityToDto(MasterEntity entity) {
         MasterDto masterDto = new MasterDto();
 
-        masterDto.setFirstName(entity.getFirstName());
-        masterDto.setSecondName(entity.getSecondName());
-
-        List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntity());
-        masterDto.setOrdersDto(ordersDto);
+        if (entity != null)
+        {
+            masterDto.setFirstName(entity.getFirstName() != null ? entity.getFirstName() : "");
+            masterDto.setSecondName(entity.getSecondName() != null ? entity.getSecondName() : "");
+            List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntity());
+            masterDto.setOrdersDto(ordersDto);
+        }
 
         return masterDto;
     }

@@ -75,6 +75,7 @@ public abstract class AbstractDao<T extends PersistableEntity> implements Generi
 		entityManager.createQuery(criteriaDelete).executeUpdate();
 	}
 
+
 	@Autowired
 	public void setEntityManager(EntityManager entityManager)
 	{
