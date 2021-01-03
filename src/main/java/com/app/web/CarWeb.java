@@ -45,6 +45,12 @@ public class CarWeb {
         carService.deleteCarById(id);
     }
 
+    @GetMapping("/get-car-by-number/{number}")
+    public CarDto getCarByNumber(@PathVariable String number) {
+        return carService.getCarByNumber(number);
+    }
+
+
     @Autowired
     public void setCarService(CarServiceImpl carService) {
         this.carService = carService;

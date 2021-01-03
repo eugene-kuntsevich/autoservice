@@ -15,4 +15,6 @@ public interface CarService
 	void deleteCarById(long carId);
 
 	List<CarDto> findAllCars();
+
+	CarDto getCarByNumber (String number);
 }

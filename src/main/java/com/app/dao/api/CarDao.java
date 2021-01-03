@@ -4,6 +4,6 @@ import com.app.model.entity.CarEntity;
 
 public interface CarDao extends GenericDao<CarEntity> {
 
-	CarEntity getCarByNumber(String number);
+	CarEntity getCarByNumber(String number) throws Exception;
 
 }
