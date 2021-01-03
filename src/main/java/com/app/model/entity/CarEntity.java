@@ -18,7 +18,7 @@ public class CarEntity extends PersistableEntityImpl {
     private OrderEntity orderEntity;
 
 
-    @Column(name = "car_number", length = 15, nullable = false)
+    @Column(name = "car_number", length = 15, nullable = false, unique = true)
     public String getCarNumber() {
         return carNumber;
     }

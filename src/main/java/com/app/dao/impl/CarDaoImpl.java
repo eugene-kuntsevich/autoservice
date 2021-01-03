@@ -18,21 +18,13 @@ public class CarDaoImpl extends AbstractDao<CarEntity> implements CarDao {
     }
 
     @Override
-    public CarEntity getCarByNumber(String number) throws Exception {
-        CarEntity carEntity = null;
+    public CarEntity getCarByNumber(String number) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<CarEntity> criteriaQuery = builder.createQuery(CarEntity.class);
 
         Root<CarEntity> entityRoot = criteriaQuery.from(CarEntity.class);
         criteriaQuery.select(entityRoot).where(builder.equal(entityRoot.get("carNumber"), number));
 
-        List<CarEntity> carEntities = entityManager.createQuery(criteriaQuery).getResultList();
-        if (carEntities.size() == 1) {
-            carEntity = entityManager.createQuery(criteriaQuery).getSingleResult();
-        } else if ( carEntities.size() > 1) {
-            throw new Exception();
-        }
-
-        return carEntity;
+        return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
 }

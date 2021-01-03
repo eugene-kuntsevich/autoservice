@@ -46,7 +46,7 @@ public class CarWeb {
     }
 
     @GetMapping("/get-car-by-number/{number}")
-    public CarDto getCarByNumber(@PathVariable String number) {
+    public CarDto getCarByNumber(@PathVariable String number){
         return carService.getCarByNumber(number);
     }
 

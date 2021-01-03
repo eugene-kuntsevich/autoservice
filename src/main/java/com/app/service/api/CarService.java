@@ -16,5 +16,5 @@ public interface CarService
 
 	List<CarDto> findAllCars();
 
-	CarDto getCarByNumber (String number);
+	CarDto getCarByNumber(String number);
 }
