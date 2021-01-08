@@ -24,6 +24,7 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
 
         if (entity != null)
         {
+            masterDto.setId(entity.getId());
             masterDto.setFirstName(entity.getFirstName() != null ? entity.getFirstName() : "");
             masterDto.setSecondName(entity.getSecondName() != null ? entity.getSecondName() : "");
             List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntity());

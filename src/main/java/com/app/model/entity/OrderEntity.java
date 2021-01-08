@@ -60,6 +60,7 @@ public class OrderEntity extends PersistableEntityImpl {
     @JoinTable(name = "master_order",
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "master_id")})
+    @JsonManagedReference
     public List<MasterEntity> getMasterEntity() {
         return masterEntity;
     }

@@ -1,14 +1,14 @@
 package com.app.dao.impl;
 
-import com.app.dao.AbstractDao;
-import com.app.dao.api.CarDao;
-import com.app.model.entity.CarEntity;
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.app.dao.AbstractDao;
+import com.app.dao.api.CarDao;
+import com.app.model.entity.CarEntity;
 
 @Repository
 public class CarDaoImpl extends AbstractDao<CarEntity> implements CarDao {
