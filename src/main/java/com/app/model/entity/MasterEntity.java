@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "master")
@@ -43,7 +43,7 @@ public class MasterEntity extends PersistableEntityImpl {
     @JoinTable(name = "master_order",
             joinColumns = @JoinColumn(name = "master_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))
-    @JsonBackReference
+    @JsonIgnore
     public List<OrderEntity> getOrderEntity() {
         return orderEntities;
     }

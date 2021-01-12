@@ -1,6 +1,7 @@
 package com.app.model.converter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,18 +18,28 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
 
     private MasterDao masterDao;
     private OrderConverter orderConverter;
+    private CarConverter carConverter;
+    private ClientConverter clientConverter;
+    private OrderStatusConverter orderStatusConverter;
 
     @Override
     public MasterDto convertFromEntityToDto(MasterEntity entity) {
         MasterDto masterDto = new MasterDto();
 
-        if (entity != null)
-        {
+        if (entity != null) {
             masterDto.setId(entity.getId());
             masterDto.setFirstName(entity.getFirstName() != null ? entity.getFirstName() : "");
             masterDto.setSecondName(entity.getSecondName() != null ? entity.getSecondName() : "");
-            List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntity());
-            masterDto.setOrdersDto(ordersDto);
+            masterDto.setAmountOfOrders(entity.getOrderEntity().size());
+            List<OrderEntity> orderEntities = entity.getOrderEntity();
+            List<OrderDto> ordersDtos = orderEntities.stream().map(orderEntity -> {
+                OrderDto orderDto = new OrderDto();
+                orderDto.setCarDto(carConverter.convertFromEntityToDto(orderEntity.getCarEntity()));
+                orderDto.setClientDto(clientConverter.convertFromEntityToDto(orderEntity.getClientEntity()));
+                orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
+                return orderDto;
+            }).collect(Collectors.toList());
+            masterDto.setOrdersDto(ordersDtos);
         }
 
         return masterDto;
@@ -56,5 +67,20 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
     @Autowired
     public void setOrderConverter(OrderConverter orderConverter) {
         this.orderConverter = orderConverter;
+    }
+
+    @Autowired
+    public void setCarConverter(CarConverter carConverter) {
+        this.carConverter = carConverter;
+    }
+
+    @Autowired
+    public void setClientConverter(ClientConverter clientConverter) {
+        this.clientConverter = clientConverter;
+    }
+
+    @Autowired
+    public void setOrderStatusConverter(OrderStatusConverter orderStatusConverter) {
+        this.orderStatusConverter = orderStatusConverter;
     }
 }

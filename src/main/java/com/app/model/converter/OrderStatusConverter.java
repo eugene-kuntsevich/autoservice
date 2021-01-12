@@ -24,8 +24,8 @@ public class OrderStatusConverter implements Converter<OrderStatusDto, OrderStat
 
         orderStatusDto.setName(entity.getName());
 
-        List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntities());
-        orderStatusDto.setOrdersDto(ordersDto);
+//        List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntities());
+//        orderStatusDto.setOrdersDto(ordersDto);
 
         return orderStatusDto;
     }

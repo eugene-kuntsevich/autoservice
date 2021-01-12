@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -60,7 +61,7 @@ public class OrderEntity extends PersistableEntityImpl {
     @JoinTable(name = "master_order",
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "master_id")})
-    @JsonManagedReference
+    @JsonIgnore
     public List<MasterEntity> getMasterEntity() {
         return masterEntity;
     }

@@ -28,8 +28,8 @@ public class ClientConverter implements Converter<ClientDto, ClientEntity> {
             clientDto.setSecondName(entity.getSecondName());
             clientDto.setEmail(entity.getEmail());
 
-            List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntities());
-            clientDto.setOrdersDto(ordersDto);
+//            List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntities());
+//            clientDto.setOrdersDto(ordersDto);
         }
         return clientDto;
     }

@@ -23,7 +23,7 @@ public class CarConverter implements Converter<CarDto, CarEntity> {
 		{
 			carDto.setCarNumber(entity.getCarNumber() != null ? entity.getCarNumber() : "");
 			carDto.setWarrantyDate(entity.getWarrantyDate());
-			carDto.setOrderDto(orderConverter.convertFromEntityToDto(entity.getOrderEntity()));
+			//carDto.setOrderDto(orderConverter.convertFromEntityToDto(entity.getOrderEntity()));
 		}
 
 		return carDto;

@@ -9,6 +9,7 @@ public class MasterDto implements Dto {
 	private String firstName;
 	private String secondName;
 	private List<OrderDto> ordersDto;
+	private int amountOfOrders;
 
 	@Override
 	public Long getId()
@@ -49,5 +50,13 @@ public class MasterDto implements Dto {
 	public void setOrdersDto(List<OrderDto> ordersDto)
 	{
 		this.ordersDto = ordersDto;
+	}
+
+	public int getAmountOfOrders() {
+		return amountOfOrders;
+	}
+
+	public void setAmountOfOrders(int amountOfOrders) {
+		this.amountOfOrders = amountOfOrders;
 	}
 }
