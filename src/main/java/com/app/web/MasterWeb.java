@@ -49,6 +49,12 @@ public class MasterWeb
         masterService.deleteMasterById(id);
     }
 
+	@GetMapping("/find-all-free-masters")
+	public List<MasterDto> findAllFreeMasters()
+	{
+		return masterService.findAllFreeMasters();
+	}
+
 	@Autowired
 	public void setMasterService(MasterService masterService)
 	{

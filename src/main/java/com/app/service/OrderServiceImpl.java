@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.exception.NotUniqueStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +19,13 @@ public class OrderServiceImpl implements OrderService {
     private OrderConverter orderConverter;
 
     @Override
-    public void saveOrder(OrderDto orderDto) throws Exception {
+    public void saveOrder(OrderDto orderDto) throws NotUniqueStatusException {
         if (checkOrderStatus(orderDto)) {
             OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
             orderDao.saveOrUpdate(orderEntity);
         } else {
             //throw new NotUniqueStatusException();
-            throw new Exception();
+            throw new NotUniqueStatusException();
         }
     }
 

@@ -28,9 +28,13 @@ INSERT INTO order_status (id, name) VALUES (3, 'Maintenance suspended');
 INSERT INTO order_status (id, name) VALUES (4, 'Maintenance completed');
 INSERT INTO order_status (id, name) VALUES (5, 'Vehicle handed over to the owner');
 
-INSERT INTO `order` (car_id, client_id, status_id) VALUES (17, 14, 1);
-INSERT INTO `order` (car_id, client_id, status_id) VALUES (18, 15, 1);
-INSERT INTO `order` (car_id, client_id, status_id) VALUES (19, 16, 1);
+INSERT INTO order (car_id, client_id, status_id) VALUES (1, 1, 1);
+INSERT INTO order (car_id, client_id, status_id) VALUES (2, 2, 1);
+INSERT INTO order (car_id, client_id, status_id) VALUES (3, 3, 1);
+INSERT INTO order (car_id, client_id, status_id) VALUES (4, 4, 1);
+INSERT INTO order (car_id, client_id, status_id) VALUES (5, 5, 1);
+INSERT INTO order (car_id, client_id, status_id) VALUES (6, 6, 1);
+INSERT INTO order (car_id, client_id, status_id) VALUES (7, 7, 1);
 
 
 
