@@ -52,7 +52,7 @@ public class MasterWeb
 	@GetMapping("/find-all-free-masters")
 	public List<MasterDto> findAllFreeMasters()
 	{
-		return masterService.findAllFreeMasters();
+		return masterService.findFreeMasters();
 	}
 
 	@Autowired

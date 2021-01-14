@@ -46,9 +46,9 @@ public class MasterServiceImpl implements MasterService {
 		return masterConverter.convertFromEntitiesToDtos(masterEntities);
 	}
 
-	public List<MasterDto> findAllFreeMasters()
+	public List<MasterDto> findFreeMasters()
 	{
-		List<MasterEntity> masterEntities = masterDao.getAllFreeMasters();
+		List<MasterEntity> masterEntities = masterDao.getFreeMasters();
 		return masterConverter.convertFromEntitiesToDtos(masterEntities);
 	}
 

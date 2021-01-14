@@ -24,8 +24,7 @@ public class OrderServiceImpl implements OrderService {
             OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
             orderDao.saveOrUpdate(orderEntity);
         } else {
-            //throw new NotUniqueStatusException();
-            throw new NotUniqueStatusException();
+            throw new NotUniqueStatusException("Introduced illegal car status");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.app.model.converter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,15 +18,29 @@ public class OrderStatusConverter implements Converter<OrderStatusDto, OrderStat
 
     private OrderStatusDao orderStatusDao;
     private OrderConverter orderConverter;
+    private CarConverter carConverter;
+    private ClientConverter clientConverter;
+    private OrderStatusConverter orderStatusConverter;
 
     @Override
     public OrderStatusDto convertFromEntityToDto(OrderStatusEntity entity) {
         OrderStatusDto orderStatusDto = new OrderStatusDto();
 
-        orderStatusDto.setName(entity.getName());
+        if (entity != null) {
+            orderStatusDto.setId(entity.getId());
+            orderStatusDto.setName(entity.getName());
 
-//        List<OrderDto> ordersDto = orderConverter.convertFromEntitiesToDtos(entity.getOrderEntities());
-//        orderStatusDto.setOrdersDto(ordersDto);
+            List<OrderEntity> orderEntities = entity.getOrderEntities();
+            List<OrderDto> orderDtos = orderEntities.stream().map(orderEntity -> {
+                OrderDto orderDto = new OrderDto();
+                orderDto.setCarDto(carConverter.convertFromEntityToDto(orderEntity.getCarEntity()));
+                orderDto.setClientDto(clientConverter.convertFromEntityToDto(orderEntity.getClientEntity()));
+                orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
+                return orderDto;
+            }).collect(Collectors.toList());
+
+            orderStatusDto.setOrdersDto(orderDtos);
+        }
 
         return orderStatusDto;
     }
@@ -33,7 +48,7 @@ public class OrderStatusConverter implements Converter<OrderStatusDto, OrderStat
     @Override
     public OrderStatusEntity convertFromDtoToEntity(OrderStatusDto dto) {
         Long id = dto.getId();
-        OrderStatusEntity orderStatusEntity = ( id != null ) ? orderStatusDao.getById(id) : new OrderStatusEntity();
+        OrderStatusEntity orderStatusEntity = (id != null) ? orderStatusDao.getById(id) : new OrderStatusEntity();
 
         orderStatusEntity.setName(dto.getName());
 
@@ -51,5 +66,20 @@ public class OrderStatusConverter implements Converter<OrderStatusDto, OrderStat
     @Autowired
     public void setOrderConverter(OrderConverter orderConverter) {
         this.orderConverter = orderConverter;
+    }
+
+    @Autowired
+    public void setCarConverter(CarConverter carConverter) {
+        this.carConverter = carConverter;
+    }
+
+    @Autowired
+    public void setClientConverter(ClientConverter clientConverter) {
+        this.clientConverter = clientConverter;
+    }
+
+    @Autowired
+    public void setOrderStatusConverter(OrderStatusConverter orderStatusConverter) {
+        this.orderStatusConverter = orderStatusConverter;
     }
 }

@@ -1,6 +1,7 @@
 package com.app.model.converter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,11 +27,19 @@ public class OrderConverter implements Converter<OrderDto, OrderEntity> {
         OrderDto orderDto = new OrderDto();
 
         if (entity != null) {
+            orderDto.setId(entity.getId());
             orderDto.setClientDto(clientConverter.convertFromEntityToDto(entity.getClientEntity()));
             orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(entity.getOrderStatusEntity()));
             orderDto.setCarDto(carConverter.convertFromEntityToDto(entity.getCarEntity()));
 
-            List<MasterDto> mastersDto = masterConverter.convertFromEntitiesToDtos(entity.getMasterEntity());
+            List<MasterEntity> masterEntities = entity.getMasterEntity();
+            List<MasterDto> mastersDto = masterEntities.stream().map(masterEntity -> {
+                MasterDto masterDto = new MasterDto();
+                masterDto.setFirstName(masterEntity.getFirstName() != null ? masterEntity.getFirstName() : "");
+                masterDto.setSecondName(masterEntity.getSecondName()!= null ? masterEntity.getSecondName() : "");
+                return masterDto;
+            }).collect(Collectors.toList());
+
             orderDto.setMastersDto(mastersDto);
         }
 

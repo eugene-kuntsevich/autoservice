@@ -16,5 +16,5 @@ public interface MasterService
 
 	List<MasterDto> findAllMasters();
 
-    List<MasterDto> findAllFreeMasters();
+    List<MasterDto> findFreeMasters();
 }
