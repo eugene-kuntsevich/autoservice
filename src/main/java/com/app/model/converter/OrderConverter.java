@@ -32,15 +32,15 @@ public class OrderConverter implements Converter<OrderDto, OrderEntity> {
             orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(entity.getOrderStatusEntity()));
             orderDto.setCarDto(carConverter.convertFromEntityToDto(entity.getCarEntity()));
 
-            List<MasterEntity> masterEntities = entity.getMasterEntity();
-            List<MasterDto> mastersDto = masterEntities.stream().map(masterEntity -> {
-                MasterDto masterDto = new MasterDto();
-                masterDto.setFirstName(masterEntity.getFirstName() != null ? masterEntity.getFirstName() : "");
-                masterDto.setSecondName(masterEntity.getSecondName()!= null ? masterEntity.getSecondName() : "");
-                return masterDto;
-            }).collect(Collectors.toList());
-
-            orderDto.setMastersDto(mastersDto);
+//            List<MasterEntity> masterEntities = entity.getMasterEntity();
+//            List<MasterDto> mastersDto = masterEntities.stream().map(masterEntity -> {
+//                MasterDto masterDto = new MasterDto();
+//                masterDto.setFirstName(masterEntity.getFirstName() != null ? masterEntity.getFirstName() : "");
+//                masterDto.setSecondName(masterEntity.getSecondName()!= null ? masterEntity.getSecondName() : "");
+//                return masterDto;
+//            }).collect(Collectors.toList());
+//
+//            orderDto.setMastersDto(mastersDto);
         }
 
         return orderDto;
@@ -49,11 +49,25 @@ public class OrderConverter implements Converter<OrderDto, OrderEntity> {
     @Override
     public OrderEntity convertFromDtoToEntity(OrderDto dto) {
         Long id = dto.getId();
-        OrderEntity orderEntity = ( id != null ) ? orderDao.getById(id) : new OrderEntity();
+        OrderEntity orderEntity = null;
+        if (id != null) {
+            orderEntity = orderDao.getById(id);
+            if (orderEntity == null) {
+                orderEntity = new OrderEntity();
+            }
+        } else {
+            orderEntity = new OrderEntity();
+        }
+        if (dto.getClientDto() != null) {
+            orderEntity.setClientEntity(clientConverter.convertFromDtoToEntity(dto.getClientDto()));
+        }
 
-        orderEntity.setClientEntity(clientConverter.convertFromDtoToEntity(dto.getClientDto()));
-        orderEntity.setOrderStatusEntity(orderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
-        orderEntity.setCarEntity(carConverter.convertFromDtoToEntity(dto.getCarDto()));
+        if (dto.getOrderStatusDto() != null) {
+            orderEntity.setOrderStatusEntity(orderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
+        }
+        if (dto.getCarDto() != null) {
+            orderEntity.setCarEntity(carConverter.convertFromDtoToEntity(dto.getCarDto()));
+        }
 
         List<MasterEntity> masterEntities = masterConverter.convertFromDtosToEntities(dto.getMastersDto());
         orderEntity.setMasterEntity(masterEntities);

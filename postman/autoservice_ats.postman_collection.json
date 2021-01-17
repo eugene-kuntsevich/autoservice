@@ -12,10 +12,16 @@
 					"name": "save master",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n   \"firstName\":\"MasterName\",\r\n   \"secondName\":\"MasterName\"\r\n}",
+							"raw": " {\r\n   \"firstName\":\"MasterName8\",\r\n   \"secondName\":\"MasterName8\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,13 +44,19 @@
 					"response": []
 				},
 				{
-					"name": "delete master",
+					"name": "delete master by id",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n   \"id\":8\r\n}",
+							"raw": " {\r\n   \"id\":14\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,13 +79,19 @@
 					"response": []
 				},
 				{
-					"name": "get master",
+					"name": "get master by id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -84,7 +102,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/master/get-master-by-id/1",
+							"raw": "http://localhost:8080/master/get-master-by-id/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -93,7 +111,7 @@
 							"path": [
 								"master",
 								"get-master-by-id",
-								"1"
+								"5"
 							]
 						}
 					},
@@ -106,7 +124,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -130,6 +154,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "find all free masters",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/master/find-free-masters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"master",
+								"find-free-masters"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -140,10 +202,16 @@
 					"name": "save car",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"carNumber\": \"4972 II 4\",\r\n    \"warrantyDate\": \"2020-12-31\",\r\n    \"orderEntity\": {\r\n        \"id\": 1\r\n    },\r\n    \"clientEntity\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"raw": "{\r\n    \"carNumber\": \"4972 IK 4\",\r\n    \"warrantyDate\": \"2020-12-31\",\r\n    \"orderEntity\": {\r\n        \"id\": 1\r\n    },\r\n    \"clientEntity\": {\r\n        \"id\": 1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,13 +234,19 @@
 					"response": []
 				},
 				{
-					"name": "delete car",
+					"name": "delete car by id",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ="
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n   \"id\":12\r\n}",
+							"raw": " {\r\n   \"id\":24\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -201,7 +275,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -212,7 +292,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/car/get-car-by-id/7",
+							"raw": "http://localhost:8080/car/get-car-by-id/20",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -221,7 +301,46 @@
 							"path": [
 								"car",
 								"get-car-by-id",
-								"7"
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cars by in equal status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/car/get-car-by-id/20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"car",
+								"get-car-by-id",
+								"20"
 							]
 						}
 					},
@@ -234,7 +353,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -245,7 +370,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/car/get-car-by-number/1111 KK-4",
+							"raw": "http://localhost:8080/car/get-car-by-number/6666 IK-4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -254,7 +379,7 @@
 							"path": [
 								"car",
 								"get-car-by-number",
-								"1111 KK-4"
+								"6666 IK-4"
 							]
 						}
 					},
@@ -267,7 +392,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -301,7 +432,13 @@
 					"name": "save order_status",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": " {\r\n   \"name\":\"333630\"\r\n    \r\n}",
@@ -330,10 +467,16 @@
 					"name": "delete order_status",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n   \"id\":6\r\n}",
+							"raw": " {\r\n   \"id\":10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -362,7 +505,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -395,7 +544,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -429,7 +584,13 @@
 					"name": "save client",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": " {\r\n   \"firstName\": \"Anton\",\r\n    \"secondName\": \"Antonov\",\r\n    \"email\": \"Antonov@gmail.com\"\r\n}",
@@ -455,13 +616,19 @@
 					"response": []
 				},
 				{
-					"name": "delete client",
+					"name": "delete client by id",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n   \"id\":11\r\n}",
+							"raw": " {\r\n   \"id\":8\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -484,13 +651,19 @@
 					"response": []
 				},
 				{
-					"name": "get client",
+					"name": "get client by id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -501,7 +674,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/client/get-client-by-id/6",
+							"raw": "http://localhost:8080/client/get-client-by-id/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -510,7 +683,7 @@
 							"path": [
 								"client",
 								"get-client-by-id",
-								"6"
+								"5"
 							]
 						}
 					},
@@ -523,7 +696,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -557,10 +736,16 @@
 					"name": "save order",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n   \"id\":1,\r\n    \"clientId\":1,\r\n    \"clientDto\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"testName2\",\r\n        \"secondName\": \"testSecondName2\",\r\n        \"email\": \"testEmail2\"\r\n    },\r\n    \"orderStatusDto\": {\r\n        \"id\":1,\r\n        \"name\": \"testStatus22\"\r\n    },\r\n    \"carDto\": {\r\n        \"id\": 1,\r\n        \"carNumber\": \"testNumber3\",\r\n        \"warrantyDate\": \"2020-12-20T15:56:53.464+00:00\"\r\n    }\r\n}",
+							"raw": " {\r\n    \"id\":1,\r\n    \"clientId\":1,\r\n    \"clientDto\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"Name_7\",\r\n        \"secondName\": \"SecondName_7\",\r\n        \"email\": \"testEmail_7\"\r\n    },\r\n    \"orderStatusDto\": {\r\n        \"id\":1,\r\n        \"name\": \"testStatus_7\"\r\n    },\r\n    \"carDto\": {\r\n        \"id\": 1,\r\n        \"carNumber\": \"1111 KK-7\",\r\n        \"warrantyDate\": \"2020-12-20\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -586,10 +771,16 @@
 					"name": "delete order",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n   \"id\":1\r\n}",
+							"raw": " {\r\n   \"id\":50\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -618,7 +809,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -629,7 +826,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/order/get-order-by-id/1",
+							"raw": "http://localhost:8080/order/get-order-by-id/14",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -638,7 +835,7 @@
 							"path": [
 								"order",
 								"get-order-by-id",
-								"1"
+								"14"
 							]
 						}
 					},
@@ -651,7 +848,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",

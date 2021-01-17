@@ -44,11 +44,11 @@ public class MasterEntity extends PersistableEntityImpl {
             joinColumns = @JoinColumn(name = "master_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))
     @JsonIgnore
-    public List<OrderEntity> getOrderEntity() {
+    public List<OrderEntity> getOrderEntities() {
         return orderEntities;
     }
 
-    public void setOrderEntity(List<OrderEntity> orderEntities) {
+    public void setOrderEntities(List<OrderEntity> orderEntities) {
         this.orderEntities = orderEntities;
     }
 }

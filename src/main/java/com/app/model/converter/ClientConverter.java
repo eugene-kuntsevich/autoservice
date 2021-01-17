@@ -32,24 +32,33 @@ public class ClientConverter implements Converter<ClientDto, ClientEntity> {
             clientDto.setSecondName(entity.getSecondName());
             clientDto.setEmail(entity.getEmail());
 
-            List<OrderEntity> orderEntities = entity.getOrderEntities();
-            List<OrderDto> ordersDtos = orderEntities.stream().map(orderEntity -> {
-                OrderDto orderDto = new OrderDto();
-                orderDto.setCarDto(carConverter.convertFromEntityToDto(orderEntity.getCarEntity()));
-                orderDto.setClientDto(clientConverter.convertFromEntityToDto(orderEntity.getClientEntity()));
-                orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
-                return orderDto;
-            }).collect(Collectors.toList());
-
-            clientDto.setOrdersDto(ordersDtos);
+//            List<OrderEntity> orderEntities = entity.getOrderEntities();
+//            List<OrderDto> ordersDtos = orderEntities.stream().map(orderEntity -> {
+//                OrderDto orderDto = new OrderDto();
+//                orderDto.setCarDto(carConverter.convertFromEntityToDto(orderEntity.getCarEntity()));
+//                orderDto.setClientDto(clientConverter.convertFromEntityToDto(orderEntity.getClientEntity()));
+//                orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
+//                return orderDto;
+//            }).collect(Collectors.toList());
+//
+//            clientDto.setOrdersDto(ordersDtos);
         }
         return clientDto;
     }
 
     @Override
     public ClientEntity convertFromDtoToEntity(ClientDto dto) {
+
         Long id = dto.getId();
-        ClientEntity clientEntity = ( id != null ) ? clientDao.getById(id) : new ClientEntity();
+        ClientEntity clientEntity = null;
+        if (id != null) {
+            clientEntity = clientDao.getById(id);
+            if (clientEntity == null) {
+                clientEntity = new ClientEntity();
+            }
+        } else {
+            clientEntity = new ClientEntity();
+        }
 
         clientEntity.setFirstName(dto.getFirstName());
         clientEntity.setSecondName(dto.getSecondName());
@@ -57,7 +66,6 @@ public class ClientConverter implements Converter<ClientDto, ClientEntity> {
 
         List<OrderEntity> orderEntities = orderConverter.convertFromDtosToEntities(dto.getOrdersDto());
         clientEntity.setOrderEntities(orderEntities);
-
         return clientEntity;
     }
 
@@ -71,13 +79,16 @@ public class ClientConverter implements Converter<ClientDto, ClientEntity> {
         this.orderConverter = orderConverter;
     }
 
+    @Autowired
     public void setCarConverter(CarConverter carConverter) {
         this.carConverter = carConverter;
     }
+
     @Autowired
     public void setClientConverter(ClientConverter clientConverter) {
         this.clientConverter = clientConverter;
     }
+
     @Autowired
     public void setOrderStatusConverter(OrderStatusConverter orderStatusConverter) {
         this.orderStatusConverter = orderStatusConverter;

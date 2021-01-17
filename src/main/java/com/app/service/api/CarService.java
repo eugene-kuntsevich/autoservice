@@ -17,4 +17,6 @@ public interface CarService
 	List<CarDto> findAllCars();
 
 	CarDto getCarByNumber(String number);
+
+    List<CarDto> findCarsEqualStatus(long id);
 }

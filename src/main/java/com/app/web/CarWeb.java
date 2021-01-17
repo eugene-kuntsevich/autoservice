@@ -35,6 +35,11 @@ public class CarWeb {
         return carService.findAllCars();
     }
 
+    @GetMapping("/find-cars-equal-status/{id}")
+    public List<CarDto> findCarsEqualStatus(@PathVariable long id) {
+        return carService.findCarsEqualStatus(id);
+    }
+
     @DeleteMapping("/delete-car")
     public void deleteCar(@RequestBody CarDto CarDto) {
         carService.deleteCar( CarDto);

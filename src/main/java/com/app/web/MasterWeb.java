@@ -49,7 +49,7 @@ public class MasterWeb
         masterService.deleteMasterById(id);
     }
 
-	@GetMapping("/find-all-free-masters")
+	@GetMapping("/find-free-masters")
 	public List<MasterDto> findAllFreeMasters()
 	{
 		return masterService.findFreeMasters();

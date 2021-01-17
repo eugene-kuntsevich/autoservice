@@ -20,11 +20,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void saveOrder(OrderDto orderDto) throws NotUniqueStatusException {
-        if (checkOrderStatus(orderDto)) {
+        //Достаём объект из БД с id соответствующему запросу
+        OrderEntity orderEntity1 = orderDao.getById(orderDto.getId());
+        if (orderEntity1 == null) {
             OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
             orderDao.saveOrUpdate(orderEntity);
         } else {
-            throw new NotUniqueStatusException("Introduced illegal car status");
+            if (checkOrderStatus(orderDto)) {
+                OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
+                orderDao.saveOrUpdate(orderEntity);
+            } else {
+                throw new NotUniqueStatusException("Introduced illegal car status");
+            }
         }
     }
 
@@ -67,10 +74,54 @@ public class OrderServiceImpl implements OrderService {
         long entityId = orderEntity.getOrderStatusEntity().getId();
 
         return entityId == dtoId
+                || (entityId == 1 && dtoId == 2)
+                || (entityId == 2 && dtoId == 3)
+                || (entityId == 2 && dtoId == 4)
+                || (entityId == 3 && dtoId == 2)
+                || dtoId == 5;
+    }
+}
+
+/*
+ @Override
+    public void saveOrder(OrderDto orderDto) throws NotUniqueStatusException {
+        if (checkOrderStatus(orderDto)) {
+            OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
+            orderDao.saveOrUpdate(orderEntity);
+        } else {
+            throw new NotUniqueStatusException("Introduced illegal car status");
+        }
+    }
+
+    private boolean checkOrderStatus(OrderDto orderDto) {
+        OrderEntity orderEntity = orderDao.getById(orderDto.getId());
+        long dtoId = orderDto.getOrderStatusDto().getId();
+        long entityId = orderEntity.getOrderStatusEntity().getId();
+
+        return entityId == dtoId
             || ( entityId == 1 && dtoId == 2 )
             || ( entityId == 2 && dtoId == 3 )
             || ( entityId == 2 && dtoId == 4 )
             || ( entityId == 3 && dtoId == 2 )
             || dtoId == 5;
     }
-}
+
+
+
+    Моя реализация
+    @Override
+    public void saveOrder(OrderDto orderDto) throws NotUniqueStatusException {
+        //Достаём объект из БД с id соответствующему запросу
+        OrderEntity orderEntity1 = orderDao.getById(orderDto.getId());
+        if (orderEntity1 == null) {
+            OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
+            orderDao.saveOrUpdate(orderEntity);
+        } else {
+            if (checkOrderStatus(orderDto)) {
+                OrderEntity orderEntity = orderConverter.convertFromDtoToEntity(orderDto);
+                orderDao.saveOrUpdate(orderEntity);
+            } else {
+                throw new NotUniqueStatusException("Introduced illegal car status");
+            }
+        }
+ */

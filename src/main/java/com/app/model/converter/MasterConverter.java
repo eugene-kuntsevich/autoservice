@@ -30,16 +30,16 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
             masterDto.setId(entity.getId());
             masterDto.setFirstName(entity.getFirstName() != null ? entity.getFirstName() : "");
             masterDto.setSecondName(entity.getSecondName() != null ? entity.getSecondName() : "");
-            masterDto.setAmountOfOrders(entity.getOrderEntity().size());
-            List<OrderEntity> orderEntities = entity.getOrderEntity();
-            List<OrderDto> ordersDtos = orderEntities.stream().map(orderEntity -> {
-                OrderDto orderDto = new OrderDto();
-                orderDto.setCarDto(carConverter.convertFromEntityToDto(orderEntity.getCarEntity()));
-                orderDto.setClientDto(clientConverter.convertFromEntityToDto(orderEntity.getClientEntity()));
-                orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
-                return orderDto;
-            }).collect(Collectors.toList());
-            masterDto.setOrdersDto(ordersDtos);
+//            masterDto.setAmountOfOrders(entity.getOrderEntities().size());
+//            List<OrderEntity> orderEntities = entity.getOrderEntities();
+//            List<OrderDto> ordersDtos = orderEntities.stream().map(orderEntity -> {
+//                OrderDto orderDto = new OrderDto();
+//                orderDto.setCarDto(carConverter.convertFromEntityToDto(orderEntity.getCarEntity()));
+//                orderDto.setClientDto(clientConverter.convertFromEntityToDto(orderEntity.getClientEntity()));
+//                orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
+//                return orderDto;
+//            }).collect(Collectors.toList());
+//            masterDto.setOrdersDto(ordersDtos);
         }
 
         return masterDto;
@@ -48,13 +48,18 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
     @Override
     public MasterEntity convertFromDtoToEntity(MasterDto dto) {
         Long id = dto.getId();
-        MasterEntity masterEntity = ( id != null ) ? masterDao.getById(id) : new MasterEntity();
+        MasterEntity masterEntity;
+        if (id != null) {
+            masterEntity = (masterDao.getById(id) != null) ? masterDao.getById(id) : new MasterEntity() ;
+        } else {
+            masterEntity = new MasterEntity();
+        }
 
         masterEntity.setFirstName(dto.getFirstName());
         masterEntity.setSecondName(dto.getSecondName());
 
         List<OrderEntity> orderEntities = orderConverter.convertFromDtosToEntities(dto.getOrdersDto());
-        masterEntity.setOrderEntity(orderEntities);
+        masterEntity.setOrderEntities(orderEntities);
 
         return masterEntity;
     }

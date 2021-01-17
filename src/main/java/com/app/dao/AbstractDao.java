@@ -34,6 +34,7 @@ public abstract class AbstractDao<T extends PersistableEntity> implements Generi
 	@Transactional
 	public void delete(T entity)
 	{
+		if (entity.getId() != null)
 		entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
 	}
 

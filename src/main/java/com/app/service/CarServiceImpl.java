@@ -51,6 +51,12 @@ public class CarServiceImpl implements CarService {
         return carConverter.convertFromEntityToDto(carEntity);
     }
 
+    @Override
+    public List<CarDto> findCarsEqualStatus(long id) {
+        List<CarEntity> carEntities = carDao.getCarsEqualStatus(id);
+        return carConverter.convertFromEntitiesToDtos(carEntities);
+    }
+
     @Autowired
     public void setCarDao(CarDao carDao) {
         this.carDao = carDao;
