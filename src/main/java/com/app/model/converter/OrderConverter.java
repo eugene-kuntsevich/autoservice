@@ -26,12 +26,18 @@ public class OrderConverter implements Converter<OrderDto, OrderEntity> {
         OrderDto orderDto = new OrderDto();
 
         if (entity != null) {
+            //OrderEntity orderEntity =new OrderEntity();
+            /*ClientConverter clientConverter1 = new ClientConverter();
+            OrderStatusConverter orderStatusConverter1=new OrderStatusConverter();
+            CarConverter carConverter1 = new CarConverter();*/
+
+            orderDto.setId(entity.getId());
             orderDto.setClientDto(clientConverter.convertFromEntityToDto(entity.getClientEntity()));
             orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(entity.getOrderStatusEntity()));
             orderDto.setCarDto(carConverter.convertFromEntityToDto(entity.getCarEntity()));
 
-            List<MasterDto> mastersDto = masterConverter.convertFromEntitiesToDtos(entity.getMasterEntity());
-            orderDto.setMastersDto(mastersDto);
+            /*List<MasterDto> mastersDto = masterConverter.convertFromEntitiesToDtos(entity.getMasterEntity());
+            orderDto.setMastersDto(mastersDto);*/
         }
 
         return orderDto;
@@ -42,12 +48,14 @@ public class OrderConverter implements Converter<OrderDto, OrderEntity> {
         Long id = dto.getId();
         OrderEntity orderEntity = ( id != null ) ? orderDao.getById(id) : new OrderEntity();
 
-        orderEntity.setClientEntity(clientConverter.convertFromDtoToEntity(dto.getClientDto()));
-        orderEntity.setOrderStatusEntity(orderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
-        orderEntity.setCarEntity(carConverter.convertFromDtoToEntity(dto.getCarDto()));
 
-        List<MasterEntity> masterEntities = masterConverter.convertFromDtosToEntities(dto.getMastersDto());
-        orderEntity.setMasterEntity(masterEntities);
+            orderEntity.setClientEntity(clientConverter.convertFromDtoToEntity(dto.getClientDto()));
+            orderEntity.setOrderStatusEntity(orderStatusConverter.convertFromDtoToEntity(dto.getOrderStatusDto()));
+            orderEntity.setCarEntity(carConverter.convertFromDtoToEntity(dto.getCarDto()));
+
+            List<MasterEntity> masterEntities = masterConverter.convertFromDtosToEntities(dto.getMastersDto());
+            orderEntity.setMasterEntity(masterEntities);
+
 
         return orderEntity;
     }

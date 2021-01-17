@@ -17,24 +17,25 @@ public class CarConverter implements Converter<CarDto, CarEntity> {
 
     private CarDao carDao;
     private OrderConverter orderConverter;
-    private ClientConverter clientConverter;
-    private OrderStatusConverter orderStatusConverter;
+    /*private ClientConverter clientConverter;
+    private OrderStatusConverter orderStatusConverter;*/
 
     @Override
     public CarDto convertFromEntityToDto(CarEntity entity) {
         CarDto carDto = new CarDto();
 
         if (entity != null) {
+            carDto.setId(entity.getId());
             carDto.setCarNumber(entity.getCarNumber() != null ? entity.getCarNumber() : "");
             carDto.setWarrantyDate(entity.getWarrantyDate());
-            //carDto.setOrderDto(orderConverter.convertFromEntityToDto(entity.getOrderEntity()));
+           // carDto.setOrderDto(orderConverter.convertFromEntityToDto(entity.getOrderEntity()));
 
-            OrderEntity orderEntity = entity.getOrderEntity();
+            /*OrderEntity orderEntity = entity.getOrderEntity();
             OrderDto orderDto = new OrderDto();
             orderDto.setClientDto(clientConverter.convertFromEntityToDto(orderEntity.getClientEntity()));
             orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
 
-            carDto.setOrderDto(orderDto);
+            carDto.setOrderDto(orderDto);*/
 
         }
 
@@ -49,9 +50,9 @@ public class CarConverter implements Converter<CarDto, CarEntity> {
         carEntity.setCarNumber(dto.getCarNumber());
         carEntity.setWarrantyDate(dto.getWarrantyDate());
         OrderDto orderDto = dto.getOrderDto();
-        if (orderDto != null) {
+
             carEntity.setOrderEntity(orderConverter.convertFromDtoToEntity(orderDto));
-        }
+
 
         return carEntity;
     }
@@ -65,4 +66,14 @@ public class CarConverter implements Converter<CarDto, CarEntity> {
     public void setOrderConverter(OrderConverter orderConverter) {
         this.orderConverter = orderConverter;
     }
+
+   /* @Autowired
+    public void setClientConverter(ClientConverter clientConverter) {
+        this.clientConverter = clientConverter;
+    }
+
+    @Autowired
+    public void setOrderStatusConverter(OrderStatusConverter orderStatusConverter) {
+        this.orderStatusConverter = orderStatusConverter;
+    }*/
 }

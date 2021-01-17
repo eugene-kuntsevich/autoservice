@@ -18,9 +18,9 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
 
     private MasterDao masterDao;
     private OrderConverter orderConverter;
-    private CarConverter carConverter;
+    /*private CarConverter carConverter;
     private ClientConverter clientConverter;
-    private OrderStatusConverter orderStatusConverter;
+    private OrderStatusConverter orderStatusConverter;*/
 
     @Override
     public MasterDto convertFromEntityToDto(MasterEntity entity) {
@@ -30,8 +30,8 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
             masterDto.setId(entity.getId());
             masterDto.setFirstName(entity.getFirstName() != null ? entity.getFirstName() : "");
             masterDto.setSecondName(entity.getSecondName() != null ? entity.getSecondName() : "");
-            masterDto.setAmountOfOrders(entity.getOrderEntity().size());
-            List<OrderEntity> orderEntities = entity.getOrderEntity();
+            masterDto.setAmountOfOrders(entity.getOrderEntities().size());
+            /*List<OrderEntity> orderEntities = entity.getOrderEntities();
             List<OrderDto> ordersDtos = orderEntities.stream().map(orderEntity -> {
                 OrderDto orderDto = new OrderDto();
                 orderDto.setCarDto(carConverter.convertFromEntityToDto(orderEntity.getCarEntity()));
@@ -39,7 +39,7 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
                 orderDto.setOrderStatusDto(orderStatusConverter.convertFromEntityToDto(orderEntity.getOrderStatusEntity()));
                 return orderDto;
             }).collect(Collectors.toList());
-            masterDto.setOrdersDto(ordersDtos);
+            masterDto.setOrdersDto(ordersDtos);*/
         }
 
         return masterDto;
@@ -54,7 +54,7 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
         masterEntity.setSecondName(dto.getSecondName());
 
         List<OrderEntity> orderEntities = orderConverter.convertFromDtosToEntities(dto.getOrdersDto());
-        masterEntity.setOrderEntity(orderEntities);
+        masterEntity.setOrderEntities(orderEntities);
 
         return masterEntity;
     }
@@ -69,7 +69,7 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
         this.orderConverter = orderConverter;
     }
 
-    @Autowired
+   /* @Autowired
     public void setCarConverter(CarConverter carConverter) {
         this.carConverter = carConverter;
     }
@@ -82,5 +82,5 @@ public class MasterConverter implements Converter<MasterDto, MasterEntity> {
     @Autowired
     public void setOrderStatusConverter(OrderStatusConverter orderStatusConverter) {
         this.orderStatusConverter = orderStatusConverter;
-    }
+    }*/
 }

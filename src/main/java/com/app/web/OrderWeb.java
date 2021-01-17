@@ -40,7 +40,7 @@ public class OrderWeb {
         orderService.deleteOrder(orderDto);
     }
 
-     @DeleteMapping("/delete-order/{id}")
+     @DeleteMapping("/delete-order-by-id/{id}")
     public void deleteOrder(@PathVariable long id) {
         orderService.deleteOrderById(id);
     }
